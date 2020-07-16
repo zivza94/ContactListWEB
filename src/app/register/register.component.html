@@ -1,0 +1,8 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    First Name: <input id="firstName" formControlName="firstName" /><br />
+    Last Name: <input id="lastName" formControlName="lastName" /><br />
+    * User Name: <input id="userName" formControlName="userName" /><br />
+    * Password: <input id="password" formControlName="password" /><br />
+    * Insert Passward again: <input id="passwordCheck" formControlName="passwordCheck" /><br />
+    <button type="submit">Login</button>
+</form>

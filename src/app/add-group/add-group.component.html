@@ -1,0 +1,9 @@
+<form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+    Group Name: <input id="groupName" formControlName="groupName" /><br />
+    Choose Contacts To Add:
+    <div *ngFor="let contact of contacts">
+        <input type="checkbox" />
+        {{ contact.name }}
+    </div>
+    <button type="submit">Login</button>
+</form>

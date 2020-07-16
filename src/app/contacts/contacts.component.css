@@ -1,0 +1,13 @@
+.contactsList{
+    min-height: 300px;
+}
+tr{
+    text-align: left;
+    align-content: initial;
+}
+td{
+    min-width: 100px;
+}
+#array{
+    text-align: center;
+}

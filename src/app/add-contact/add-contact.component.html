@@ -1,0 +1,30 @@
+<form [formGroup]="addContact" (ngSubmit)="onSubmit()">
+    Name: <input id="name" formControlName="name" /><br />
+    Groups: <div id="array" formArrayName="groups">
+        <div>
+            <button mat-mini-fab color="primary" type="button" (click)="add('groups')">
+                <mat-icon>plus_one</mat-icon>
+            </button>
+        </div>
+    </div>
+    Image: <input type="file" (change)="onImgChose($event)" formControlName="image" /><br />
+    Mobile: <div id="array" formArrayName="mobile">
+        <button mat-mini-fab color="primary" type="button" (click)="add('mobile')">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+    </div>
+    Telephone: <div id="array" formArrayName="telephone">
+        <button mat-mini-fab color="primary" type="button" (click)="add('telephone')">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+    </div>
+    Mail: <div id="array" formArrayName="mail">
+        <button mat-mini-fab color="primary" type="button" (click)="add('mail')">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+    </div>
+    Website: <input id="website" formControlName="website" /><br />
+    Address: <input id="address" formControlName="address" /><br />
+    User name: <input id="userName" formControlName="userName" /><br />
+    <button type="submit">Update contact</button>
+</form>
