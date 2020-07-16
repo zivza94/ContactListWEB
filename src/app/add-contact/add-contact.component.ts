@@ -53,4 +53,16 @@ export class AddContactComponent implements OnInit {
     contact.userName = form.get('userName').value
     return contact
   }
+  get mobile(): FormArray {
+    return this.addContact.get('mobile') as FormArray;
+  }
+  get groups(): FormArray {
+    return this.addContact.get('groups') as FormArray;
+  }
+  get mail(): FormArray {
+    return this.addContact.get('mail') as FormArray;
+  }
+  get telephone(): FormArray {
+    return this.addContact.get('telephone') as FormArray;
+  }
 }
