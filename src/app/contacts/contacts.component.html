@@ -2,8 +2,8 @@
     <tr>
         <div class="contactsList"></div>
         <td>
-            <ng-container *ngFor="let contact of contacts">
-                <img src="{{contact.image}}" alt="Picture">
+            <ng-container *ngFor="let contact of contactsArray">
+                <img src="contact.image" alt="Picture">
                 <button id="contact.id" (click)="showContact(contact)">{{contact.name}}</button><br />
             </ng-container>
         </td>

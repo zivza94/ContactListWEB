@@ -10,51 +10,22 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contacts: Array<Contact> = new Array<Contact>()
+  contacts: Map<number,Contact> = new Map<number,Contact>()
   selectContact: FormGroup
   selectedContact: Contact
   selectedid: number = 0
   data: Array<string>
   constructor(private contactService: ContactService,
     private route: ActivatedRoute) {
-    var contact1 = new Contact(1, "ziv", [], null)
-    var contact2 = new Contact(2, "david", [], null)
-    var contact3 = new Contact(3, "ash", [], null)
-    contact1.address = "haifa,Israel"
-    contact1.mobile.push("0542559492")
-    contact1.mobile.push("0542559492")
-    this.contacts.push(contact1)
-    /*var contact1 = new Contact(4,"bob",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(5,"avi",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(6,"alice",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(7,"nathan",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(8,"rob",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(9,"lid",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(10,"dam",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(11,"van",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(12,"madam",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(13,"lona",[],null)
-    this.contacts.push(contact1)
-    var contact1 = new Contact(14,"yolo",[],null)
-    this.contacts.push(contact1)*/
-    this.contacts.push(contact2)
-    this.contacts.push(contact3)
+      this.getcontacts("1234");
   }
 
   ngOnInit(): void {
   }
   getcontacts(userName: string) {
     this.contactService.getContacts(userName)
-      .subscribe()
+      .subscribe(contacts => 
+        this.contacts = contacts)
   }
   showContact(contact: Contact) {
     if (this.selectedid == contact.id) {
@@ -95,6 +66,7 @@ export class ContactsComponent implements OnInit {
     }
   }
   onSubmit() {
+    this.contactService.updateContact(this.formToContact(this.selectContact))
     console.log("contact id:" + this.selectedid +
       "changed to \n" + "name: " + this.selectContact.value.name.value + "\n mobile: " + this.selectContact.value.mobile)
   }
@@ -102,6 +74,16 @@ export class ContactsComponent implements OnInit {
     console.log("add taped")
     var f: FormArray = this.selectContact.get(name) as FormArray
     f.push(new FormControl())
+  }
+  get contactsArray():Array<Contact>{
+    /*var contArray = new Array<Contact>()
+    this.contacts.forEach((contact,id) => contArray.push(contact))
+    return contArray*/
+    var values = Object.values(this.contacts)
+    //while(values.next().value)
+    var contArray = Array.from(values)
+    return contArray
+    //return this.contacts.forEach(contact => )
   }
   get mobile(): FormArray {
     return this.selectContact.get('mobile') as FormArray;
@@ -117,6 +99,15 @@ export class ContactsComponent implements OnInit {
   }
   onImgChose(event) {
     console.log(event)
+  }
+  formToContact(form:FormGroup): Contact{
+    var contact = new Contact(this.selectedid,form.get('name').value,form.get('groups').value,form.get('image').value)
+    contact.address = form.get('address').value
+    contact.mobile = form.get('mobile').value
+    contact.telephone = form.get('telephone').value
+    contact.website = form.get('website').value
+    contact.userName = form.get('userName').value
+    return contact
   }
 }
 
