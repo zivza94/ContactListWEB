@@ -1,8 +1,61 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Register</h2>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="first name">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="inputFirstName" placeholder="last name">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="inputUserName" placeholder="Choose user name">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="inputPassword"
+                                placeholder="Choose password">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="inputPasswordAgain"
+                                placeholder="Enter password again">
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right login_btn">Register</button>
+                    </form>
+                    <div class="error-msg">
+                        {{login}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!--<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     First Name: <input id="firstName" formControlName="firstName" /><br />
     Last Name: <input id="lastName" formControlName="lastName" /><br />
     * User Name: <input id="userName" formControlName="userName" /><br />
     * Password: <input id="password" formControlName="password" /><br />
     * Insert Passward again: <input id="passwordCheck" formControlName="passwordCheck" /><br />
     <button type="submit">Login</button>
-</form>
+</form> -->
