@@ -22,7 +22,7 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
-    //this.getcontacts(this.userName)
+    this.getcontacts()
   }
   getcontacts() {
     this.contactService.getContacts(this.userName)
