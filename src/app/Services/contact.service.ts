@@ -7,14 +7,17 @@ import { CommService } from './comm.service';
   providedIn: 'root'
 })
 export class ContactService {
-  getContacts(userName: string): Observable<Map<number,Contact>> {
-    return this.commService.getContacts(userName)
+  getContacts(userName: string): Observable<Array<Contact>> {
+    return this.commService.GetContacts(userName)
   }
-  updateContact(contact:Contact){
-    this.commService.UpdateContact(contact)
+  updateContact(userName:string,contact:Contact){
+    this.commService.UpdateContact(userName,contact)
   }
-  addContact(contact:Contact){
-    this.commService.AddContact(contact)
+  addContact(userName:string,contact:Contact){
+    this.commService.AddContact(userName,contact)
+  }
+  deleteContact(userName:string,contact:Contact){
+    this.commService.DeleteContact(userName,contact)
   }
   constructor(private commService: CommService) { }
 }

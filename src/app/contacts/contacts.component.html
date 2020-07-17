@@ -1,14 +1,15 @@
+<button (click)="getcontacts()"></button>
 <table border=1>
     <tr>
         <div class="contactsList"></div>
         <td>
-            <ng-container *ngFor="let contact of contactsArray">
+            <ng-container *ngFor="let contact of contacts">
                 <img src="contact.image" alt="Picture">
                 <button id="contact.id" (click)="showContact(contact)">{{contact.name}}</button><br />
             </ng-container>
         </td>
         <td>
-            <div *ngIf="selectedid!=0">
+            <div *ngIf="selectedid>=0">
                 <form [formGroup]="selectContact" (ngSubmit)="onSubmit()">
                     Name: <input id="name" formControlName="name" /><br />
                     Groups: <div id="array" formArrayName="groups">

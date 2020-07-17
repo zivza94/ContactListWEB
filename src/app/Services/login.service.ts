@@ -12,8 +12,8 @@ export class LoginService {
   }
 
   constructor(private commService: CommService) { }
-  Login(value: any): Observable<LoginResponse> {
-    return this.commService.Login(value)
+  Login(userName:string,password:string): Observable<LoginResponse> {
+    return this.commService.Login(userName,password)
   }
 
 }

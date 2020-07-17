@@ -3,6 +3,7 @@ import { ContactService } from '../Services/contact.service';
 import { Contact } from '../DTO/contact';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { SharedDataService } from '../Services/shared-data.service';
 
 @Component({
   selector: 'app-contacts',
@@ -10,27 +11,28 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contacts: Map<number,Contact> = new Map<number,Contact>()
+  userName:string
+  contacts: Array<Contact> = new Array<Contact>()
   selectContact: FormGroup
   selectedContact: Contact
-  selectedid: number = 0
+  selectedid: number = -1
   data: Array<string>
   constructor(private contactService: ContactService,
-    private route: ActivatedRoute) {
-      this.getcontacts("1234");
-  }
+    private route: ActivatedRoute,private sharedDataService:SharedDataService) { }
 
   ngOnInit(): void {
+    this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
+    //this.getcontacts(this.userName)
   }
-  getcontacts(userName: string) {
-    this.contactService.getContacts(userName)
+  getcontacts() {
+    this.contactService.getContacts(this.userName)
       .subscribe(contacts => 
         this.contacts = contacts)
   }
   showContact(contact: Contact) {
     if (this.selectedid == contact.id) {
       this.selectContact = null
-      this.selectedid = 0;
+      this.selectedid = -1;
       this.selectedContact = null
     } else {
       this.selectedContact = contact
@@ -47,7 +49,7 @@ export class ContactsComponent implements OnInit {
       })
       var groups = this.selectContact.get("groups") as FormArray
       contact.groups.forEach(element => {
-        groups.push(new FormControl(element))
+        groups.push(new FormControl(element.groupName))
       });
       var mobile = this.selectContact.get("mobile") as FormArray
       contact.mobile.forEach(element => {
@@ -66,7 +68,7 @@ export class ContactsComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.contactService.updateContact(this.formToContact(this.selectContact))
+    this.contactService.updateContact(this.userName,this.formToContact(this.selectContact))
     console.log("contact id:" + this.selectedid +
       "changed to \n" + "name: " + this.selectContact.value.name.value + "\n mobile: " + this.selectContact.value.mobile)
   }
@@ -75,16 +77,11 @@ export class ContactsComponent implements OnInit {
     var f: FormArray = this.selectContact.get(name) as FormArray
     f.push(new FormControl())
   }
-  get contactsArray():Array<Contact>{
-    /*var contArray = new Array<Contact>()
-    this.contacts.forEach((contact,id) => contArray.push(contact))
-    return contArray*/
+  /*get contactsArray():Array<Contact>{  
     var values = Object.values(this.contacts)
-    //while(values.next().value)
     var contArray = Array.from(values)
     return contArray
-    //return this.contacts.forEach(contact => )
-  }
+  }*/
   get mobile(): FormArray {
     return this.selectContact.get('mobile') as FormArray;
   }
