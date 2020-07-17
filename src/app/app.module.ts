@@ -18,6 +18,7 @@ import { LocalCommService } from './Services/local-comm.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -38,8 +39,8 @@ import { MatIconModule } from '@angular/material/icon';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatIconModule
-    
+    MatIconModule,
+    FontAwesomeModule
   ],
   providers: [{ provide: CommService, useClass: LocalCommService }],
   bootstrap: [AppComponent]

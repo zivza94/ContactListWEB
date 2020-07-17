@@ -9,7 +9,6 @@ import { AddContactComponent } from './add-contact/add-contact.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { HomeComponent } from './home/home.component';
 
-
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home", component: HomeComponent },
@@ -22,7 +21,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
