@@ -1,9 +1,38 @@
-<form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Add Group</h2>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-users"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="inputGroupName" placeholder="enter group name">
+                        </div>
+                        Choose contacts to add:
+                        <div *ngFor="let contact of contacts" id="contacts">
+                            <input type="checkbox" />
+                            {{ contact.name }}
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right add_btn">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!-- <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
     Group Name: <input id="groupName" formControlName="groupName" /><br />
     Choose Contacts To Add:
     <div *ngFor="let contact of contacts">
         <input type="checkbox" />
         {{ contact.name }}
     </div>
-    <button type="submit">Login</button>
-</form>
+    <button type="submit">Add</button>
+</form> -->
