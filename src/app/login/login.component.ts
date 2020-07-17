@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from '../Services/login.service';
+import { SharedDataService } from '../Services/shared-data.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   login: boolean = false
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,private sharedDataService:SharedDataService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup(
@@ -26,5 +27,7 @@ export class LoginComponent implements OnInit {
     /*this.loginService.Login(this.loginForm.value)
     .subscribe(result => console.log(result))*/
     this.login = true;
+    this.sharedDataService.changeMessage(this.loginForm.value.userName.value)
+
   }
 }
