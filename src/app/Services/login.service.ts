@@ -19,6 +19,7 @@ export class LoginService {
       map(response => {
         if(response.status ==="OK"){
           this.sharedDataService.changeMessage(userName)
+          this.userName = userName
         }
         return response
       })

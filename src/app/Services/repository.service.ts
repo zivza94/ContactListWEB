@@ -16,7 +16,7 @@ export class RepositoryService {
   //contacts:Array<Contact> = new Array<Contact>()
   constructor() {
     var contacts = new Map<number, Contact>()
-    var admin: User = new User("", "", "admin", "admin", [], [], [0, 0])
+    var admin: User = new User("admin", "user", "admin", "admin", [], [], [0, 0])
     this.Register(admin)
     var contact1 = new Contact(1, "ziv", [], null)
     var contact2 = new Contact(2, "david", [], null)
@@ -78,7 +78,7 @@ export class RepositoryService {
   // Register
   Register(user: User): RegisterResponse {
     var retval = new RegisterResponse("OK", " register seccessfully")
-    if (this.users.has(user.username)) {
+    if (user.username in this.users) {
       retval.status = "Invalid"
       retval.message = "User name is already taken"
       return retval
