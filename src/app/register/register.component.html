@@ -11,38 +11,40 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="inputFirstName" placeholder="first name">
+                            <input type="text" class="form-control" formControlName="firstname"
+                                placeholder="first name">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="inputFirstName" placeholder="last name">
+                            <input type="text" class="form-control" formControlName="lastname" placeholder="last name">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="inputUserName" placeholder="Choose user name">
+                            <input type="text" class="form-control" formControlName="username"
+                                placeholder="Choose user name">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" id="inputPassword"
+                            <input type="password" class="form-control" formControlName="password"
                                 placeholder="Choose password">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" id="inputPasswordAgain"
+                            <input type="password" class="form-control" formControlName="passwordcheck"
                                 placeholder="Enter password again">
                         </div>
                         <button type="submit" class="btn btn-primary float-right login_btn">Register</button>
                     </form>
                     <div class="error-msg">
-                        {{login}}
+                        {{registerMsg}}
                     </div>
                 </div>
             </div>

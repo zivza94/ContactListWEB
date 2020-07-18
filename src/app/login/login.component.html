@@ -25,7 +25,7 @@
                     </form>
                     <a routerLink="/register"> don't have an account yet?</a>
                     <div class="error-msg">
-                        {{login}}
+                        {{loggedIn}}
                     </div>
                     <h4>{{errorMsg}}</h4>
                 </div>
@@ -33,30 +33,3 @@
         </div>
     </div>
 </body>
-
-
-<!--
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="inputUserName">user name</label>
-        <input type="text" class="form-control" id="inputUserName" placeholder="Enter your user name">
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-<div>
-    {{login}}
-</div>
--->
-
-<!--<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    User Name: <input id="userName" formControlName="userName" /><br />
-    Password: <input id="password" formControlName="password" /><br />
-    <button type="submit">Login</button>
-</form>
-<div>
-    {{login}}
-</div> -->

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from '../Services/login.service';
 import { SharedDataService } from '../Services/shared-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,17 @@ import { SharedDataService } from '../Services/shared-data.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup
-  login: boolean = false
+  loggedIn: boolean = false
   errorMsg: string = ""
 
-  constructor(private loginService: LoginService, private sharedDataService: SharedDataService) { }
+  constructor(private loginService: LoginService, private sharedDataService: SharedDataService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if (this.loginService.isAuthenticated()) {
+      console.log("in")
+      this.router.navigate(['/home'])
+    }
     this.loginForm = new FormGroup(
       {
         username: new FormControl(),
@@ -35,10 +41,10 @@ export class LoginComponent implements OnInit {
 
     this.loginService.Login(this.loginForm.value.username, this.loginForm.value.password).
       subscribe(result => {
-        if (result.status != "OK") {
-          this.errorMsg = result.message
+        if (result.status == "OK") {
+          this.router.navigate(['/home'])
         } else {
-          this.login = true;
+          this.errorMsg = result.message
         }
       })
   }

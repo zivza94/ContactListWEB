@@ -15,7 +15,7 @@ export class RepositoryService {
   //contacts:Array<Contact> = new Array<Contact>()
   constructor() {
     var contacts = new Map<number, Contact>()
-    var admin: User = new User("admin", "admin", [], [], [0, 0])
+    var admin: User = new User("", "", "admin", "admin", [], [], [0, 0])
     this.Register(admin)
     var contact1 = new Contact(1, "ziv", [], null)
     var contact2 = new Contact(2, "david", [], null)
@@ -81,7 +81,7 @@ export class RepositoryService {
       retval.message = "User name is already taken"
       return retval
     }
-    this.users[user.username] = new User(user.username, user.password, [], [], [0, 0])
+    this.users[user.username] = new User("", "", user.username, user.password, [], [], [0, 0])
     return retval
   }
   // Login

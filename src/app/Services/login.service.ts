@@ -7,13 +7,24 @@ import { LoginResponse } from '../DTO/login-response';
   providedIn: 'root'
 })
 export class LoginService {
+  loggedIn: boolean = false
   isAuthenticated(): boolean {
-    return true
+    return this.loggedIn;
   }
 
   constructor(private commService: CommService) { }
-  Login(userName:string,password:string): Observable<LoginResponse> {
-    return this.commService.Login(userName,password)
+  Login(userName: string, password: string): Observable<LoginResponse> {
+    this.commService.Login(userName, password).
+      subscribe(result => {
+        if (result.status != "OK") {
+          this.loggedIn = false;
+          console.log("not okay");
+        } else {
+          this.loggedIn = true;
+          console.log("okay");
+        }
+      })
+    return this.commService.Login(userName, password)
   }
 
 }

@@ -9,27 +9,25 @@ import { RegisterService } from '../Services/register.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup
-  login: boolean = false
-
+  registerMsg: string = ""
   constructor(private registerService: RegisterService) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
       {
-        firstName: new FormControl,
-        lastName: new FormControl,
-        userName: new FormControl(),
+        firstname: new FormControl,
+        lastname: new FormControl,
+        username: new FormControl(),
         password: new FormControl(),
-        passwordCheck: new FormControl()
+        passwordcheck: new FormControl()
       }
     )
   }
 
   onSubmit() {
-    console.log("userName: " + this.registerForm.value.userName.value + " password: " + this.registerForm.value.password.value)
+    console.log("userName: " + this.registerForm.value.username + " password: " + this.registerForm.value.password)
     /*this.loginService.Login(this.loginForm.value)
     .subscribe(result => console.log(result))*/
-    this.login = true;
   }
 
 }
