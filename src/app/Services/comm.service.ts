@@ -14,6 +14,7 @@ export abstract class CommService {
   abstract Register(user:User):Observable<RegisterResponse>
   //login
   abstract Login(userName:string,password:string): Observable<LoginResponse>
+  abstract isAuthenticated(userName:string):Observable<Boolean>
   //contacts
   abstract GetContacts(userName: string): Observable<Array<Contact>>
   abstract UpdateContact(userName:string, contact: Contact)

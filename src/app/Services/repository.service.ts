@@ -11,6 +11,7 @@ import { Group } from '../DTO/groups';
 export class RepositoryService {
   //contacts:Map<number,Contact> = new Map()
   users: Map<string, User> = new Map()
+  loginUsers:Array<string> = new Array()
 
   //contacts:Array<Contact> = new Array<Contact>()
   constructor() {
@@ -52,7 +53,8 @@ export class RepositoryService {
   }
   //Contacts
   GetContacts(userName: string): Array<Contact> {
-    return this.users[userName].contacts
+    var contacts = this.users[userName].contacts.sort(this.contactSorter)
+    return contacts
   }
   UpdateContact(userName: string, contact: Contact) {
     var contacts = this.users[userName].contacts
@@ -95,11 +97,23 @@ export class RepositoryService {
       if (user.password == password) {
         retval.status = "OK"
         retval.message = "Login successfully"
+        this.loginUsers.push(user.userName)
       }
     }
     return retval
 
   }
+
+  Logout(userName:string){
+    this.loginUsers = this.loginUsers.filter(usr => usr != userName)
+  }
+  isAuthenticated(userName:string):Boolean{
+    if(userName in this.loginUsers){
+      return true
+    }
+    return false
+  }
+
 
 
   //gruops
@@ -122,4 +136,10 @@ export class RepositoryService {
     this.users[userName].groups = newGroup
   }
 
+  private contactSorter(a:Contact, b:Contact){
+    return a.name.localeCompare(b.name)
+  }
+  private groupSorter(a:Group,b:Group){
+    return a.groupName.localeCompare(b.groupName)
+  }
 }

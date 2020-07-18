@@ -2,22 +2,26 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contact } from '../DTO/contact';
 import { CommService } from './comm.service';
+import { SharedDataService } from './shared-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  getContacts(userName: string): Observable<Array<Contact>> {
-    return this.commService.GetContacts(userName)
+  userName:string
+  getContacts(): Observable<Array<Contact>> {
+    return this.commService.GetContacts(this.userName)
   }
-  updateContact(userName:string,contact:Contact){
-    this.commService.UpdateContact(userName,contact)
+  updateContact(contact:Contact){
+    this.commService.UpdateContact(this.userName,contact)
   }
-  addContact(userName:string,contact:Contact){
-    this.commService.AddContact(userName,contact)
+  addContact(contact:Contact){
+    this.commService.AddContact(this.userName,contact)
   }
-  deleteContact(userName:string,contact:Contact){
-    this.commService.DeleteContact(userName,contact)
+  deleteContact(contact:Contact){
+    this.commService.DeleteContact(this.userName,contact)
   }
-  constructor(private commService: CommService) { }
+  constructor(private commService: CommService, private sharedDataService:SharedDataService) {
+    this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
+   }
 }

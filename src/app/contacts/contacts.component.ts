@@ -25,7 +25,7 @@ export class ContactsComponent implements OnInit {
     this.getcontacts()
   }
   getcontacts() {
-    this.contactService.getContacts(this.userName)
+    this.contactService.getContacts()
       .subscribe(contacts => 
         this.contacts = contacts)
   }
@@ -68,14 +68,18 @@ export class ContactsComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.contactService.updateContact(this.userName,this.formToContact(this.selectContact))
-    console.log("contact id:" + this.selectedid +
-      "changed to \n" + "name: " + this.selectContact.value.name.value + "\n mobile: " + this.selectContact.value.mobile)
+    this.contactService.updateContact(this.formToContact(this.selectContact))
+    this.getcontacts()
   }
   add(name: string) {
     console.log("add taped")
     var f: FormArray = this.selectContact.get(name) as FormArray
     f.push(new FormControl())
+  }
+  remove(name: string,index:number){
+    console.log("add taped")
+    var f: FormArray = this.selectContact.get(name) as FormArray
+    f.removeAt(index)
   }
   /*get contactsArray():Array<Contact>{  
     var values = Object.values(this.contacts)
@@ -99,9 +103,10 @@ export class ContactsComponent implements OnInit {
   }
   formToContact(form:FormGroup): Contact{
     var contact = new Contact(this.selectedid,form.get('name').value,form.get('groups').value,form.get('image').value)
-    contact.address = form.get('address').value
     contact.mobile = form.get('mobile').value
     contact.telephone = form.get('telephone').value
+    contact.mail = form.get('mail').value
+    contact.address = form.get('address').value
     contact.website = form.get('website').value
     contact.userName = form.get('userName').value
     return contact
