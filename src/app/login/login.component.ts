@@ -13,15 +13,23 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loggedIn: boolean = false
   errorMsg: string = ""
+  userName: string
 
   constructor(private loginService: LoginService, private sharedDataService: SharedDataService,
     private router: Router) { }
 
   ngOnInit(): void {
-    if (this.loginService.isAuthenticated()) {
-      console.log("in")
-      this.router.navigate(['/home'])
-    }
+    this.sharedDataService.currentMessage.subscribe(
+      msg => this.userName = msg
+    )
+
+    this.loginService.isAuthenticated(this.userName).subscribe(
+      result => {
+        if (result) {
+          this.router.navigate(['/home'])
+        }
+      })
+
     this.loginForm = new FormGroup(
       {
         username: new FormControl(),

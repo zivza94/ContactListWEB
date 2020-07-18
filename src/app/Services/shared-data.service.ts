@@ -7,10 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedDataService {
 
   constructor() { }
-  public 
-  private massageSource = new BehaviorSubject<string>("admin")
+  public
+  private massageSource = new BehaviorSubject<string>("")
   currentMessage = this.massageSource.asObservable()
-  changeMessage(message:string){
+  changeMessage(message: string) {
     this.massageSource.next(message)
   }
 }
