@@ -16,21 +16,9 @@ export class LoginComponent implements OnInit {
   errorMsg: string = ""
   userName: string
 
-  constructor(private loginService: LoginService, private sharedDataService: SharedDataService,
-    private router: Router) { }
+  constructor(private loginService: LoginService,private router: Router) { }
 
   ngOnInit(): void {
-    this.sharedDataService.currentMessage.subscribe(
-      msg => this.userName = msg
-    )
-
-    this.loginService.isAuthenticated().pipe(
-      map(aut => {
-        if(aut){
-          this.router.navigate(['/home'])
-        }
-      })
-    )
     this.loginForm = new FormGroup(
       {
         username: new FormControl("admin"),
