@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
     )
     this.loginForm = new FormGroup(
       {
-        username: new FormControl(),
-        password: new FormControl()
+        username: new FormControl("admin"),
+        password: new FormControl("admin")
       }
     )
     
