@@ -9,19 +9,18 @@ import { SharedDataService } from './shared-data.service';
 })
 export class ContactService {
   userName:string
-  getContacts(): Observable<Array<Contact>> {
-    return this.commService.GetContacts(this.userName)
+  getContacts(userName:string): Observable<Array<Contact>> {
+    return this.commService.GetContacts(userName)
   }
-  updateContact(contact:Contact){
-    this.commService.UpdateContact(this.userName,contact)
+  updateContact(userName:string,contact:Contact){
+    this.commService.UpdateContact(userName,contact)
   }
-  addContact(contact:Contact){
-    this.commService.AddContact(this.userName,contact)
+  addContact(userName:string,contact:Contact){
+    this.commService.AddContact(userName,contact)
   }
-  deleteContact(contact:Contact){
-    this.commService.DeleteContact(this.userName,contact)
+  deleteContact(userName:string,contact:Contact){
+    this.commService.DeleteContact(userName,contact)
   }
   constructor(private commService: CommService, private sharedDataService:SharedDataService) {
-    this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
    }
 }

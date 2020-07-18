@@ -34,7 +34,7 @@ export class AddContactComponent implements OnInit {
 
   onSubmit() {
     console.log("sumbit")
-    this.contactService.addContact(this.formToContact(this.addContact))
+    //this.contactService.addContact(this.userName,this.formToContact(this.addContact))
     this.location.back()
   }
 
