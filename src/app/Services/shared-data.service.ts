@@ -8,7 +8,7 @@ export class SharedDataService {
 
   constructor() { }
   public
-  private massageSource = new BehaviorSubject<string>("")
+  private massageSource = new BehaviorSubject<string>("admin")
   currentMessage = this.massageSource.asObservable()
   changeMessage(message: string) {
     this.massageSource.next(message)
