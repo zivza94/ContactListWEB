@@ -4,6 +4,9 @@ import { Contact } from '../DTO/contact';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { SharedDataService } from '../Services/shared-data.service';
+import { Group } from '../DTO/groups';
+import { GroupsService } from '../Services/groups.service';
+import { ContactVM } from '../VM/contact-vm';
 
 @Component({
   selector: 'app-contacts',
@@ -13,12 +16,14 @@ import { SharedDataService } from '../Services/shared-data.service';
 export class ContactsComponent implements OnInit {
   userName:string
   contacts: Array<Contact> = new Array<Contact>()
-  selectContact: FormGroup
+  groups: Array<Group> = new Array<Group>()
+  selectContact: ContactVM = new ContactVM
   selectedContact: Contact
   selectedid: number = -1
   data: Array<string>
   constructor(private contactService: ContactService,
-    private route: ActivatedRoute,private sharedDataService:SharedDataService) { }
+    private route: ActivatedRoute,private sharedDataService:SharedDataService,
+    private groupService:GroupsService) { }
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
@@ -29,6 +34,11 @@ export class ContactsComponent implements OnInit {
       .subscribe(contacts => 
         this.contacts = contacts)
   }
+  getGroups(){
+    this.groupService.getGroups(this.userName).subscribe(
+      groups => this.groups = groups
+    )
+  }
   showContact(contact: Contact) {
     if (this.selectedid == contact.id) {
       this.selectContact = null
@@ -36,9 +46,9 @@ export class ContactsComponent implements OnInit {
       this.selectedContact = null
     } else {
       this.selectedContact = contact
-      this.selectContact = new FormGroup({
+      var form = new FormGroup({
         name: new FormControl(contact.name),//name
-        groups: new FormArray([]),//groups
+        //groups: new FormArray([]),//groups
         image: new FormControl(contact.image),//image
         mobile: new FormArray([]),//mobile
         telephone: new FormArray([]),//telephone
@@ -47,19 +57,21 @@ export class ContactsComponent implements OnInit {
         address: new FormControl(contact.address),//address
         userName: new FormControl(contact.userName)//userName
       })
-      var groups = this.selectContact.get("groups") as FormArray
+      this.selectContact.form = form
+      this.selectContact.groups = contact.groups
+      /*var groups = this.selectContact.get("groups") as FormArray
       contact.groups.forEach(element => {
         groups.push(new FormControl(element.groupName))
-      });
-      var mobile = this.selectContact.get("mobile") as FormArray
+      });*/
+      var mobile = this.selectContact.form.get("mobile") as FormArray
       contact.mobile.forEach(element => {
         mobile.push(new FormControl(element))
       });
-      var telephone = this.selectContact.get("telephone") as FormArray
+      var telephone = this.selectContact.form.get("telephone") as FormArray
       contact.telephone.forEach(element => {
         telephone.push(new FormControl(element))
       });
-      var mail = this.selectContact.get("mail") as FormArray
+      var mail = this.selectContact.form.get("mail") as FormArray
       contact.mail.forEach(element => {
         mail.push(new FormControl(element))
       });
@@ -73,13 +85,19 @@ export class ContactsComponent implements OnInit {
   }
   add(name: string) {
     console.log("add taped")
-    var f: FormArray = this.selectContact.get(name) as FormArray
+    var f: FormArray = this.selectContact.form.get(name) as FormArray
     f.push(new FormControl())
   }
   remove(name: string,index:number){
     console.log("add taped")
-    var f: FormArray = this.selectContact.get(name) as FormArray
+    var f: FormArray = this.selectContact.form.get(name) as FormArray
     f.removeAt(index)
+  }
+  addGroup(group){
+    this.selectContact.groups.push(group)
+  }
+  removeGroup(group){
+    this.selectContact.groups = this.selectedContact.groups.filter(gro => gro.groupID != group.groupID)
   }
   /*get contactsArray():Array<Contact>{  
     var values = Object.values(this.contacts)
@@ -87,29 +105,34 @@ export class ContactsComponent implements OnInit {
     return contArray
   }*/
   get mobile(): FormArray {
-    return this.selectContact.get('mobile') as FormArray;
+    return this.selectContact.form.get('mobile') as FormArray;
   }
-  get groups(): FormArray {
+  /*get groups(): FormArray {
     return this.selectContact.get('groups') as FormArray;
-  }
+  }*/
   get mail(): FormArray {
-    return this.selectContact.get('mail') as FormArray;
+    return this.selectContact.form.get('mail') as FormArray;
   }
   get telephone(): FormArray {
-    return this.selectContact.get('telephone') as FormArray;
+    return this.selectContact.form.get('telephone') as FormArray;
   }
   onImgChose(event) {
     console.log(event)
   }
-  formToContact(form:FormGroup): Contact{
-    var contact = new Contact(this.selectedid,form.get('name').value,form.get('groups').value,form.get('image').value)
-    contact.mobile = form.get('mobile').value
-    contact.telephone = form.get('telephone').value
-    contact.mail = form.get('mail').value
-    contact.address = form.get('address').value
-    contact.website = form.get('website').value
-    contact.userName = form.get('userName').value
+  formToContact(cont:{form:FormGroup,groups:Array<Group>}): Contact{
+    var contact = new Contact(this.selectedid,cont.form.get('name').value,cont.groups,cont.form.get('image').value)
+    contact.mobile = cont.form.get('mobile').value
+    contact.telephone = cont.form.get('telephone').value
+    contact.mail = cont.form.get('mail').value
+    contact.address = cont.form.get('address').value
+    contact.website = cont.form.get('website').value
+    contact.userName = cont.form.get('userName').value
     return contact
+  }
+  groupFormArrayToArray(form:FormArray):Array<Group>{
+    var groups = new Array<Group>()
+    form.controls.forEach(group => groups.push(group.value))
+    return groups
   }
 }
 

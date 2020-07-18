@@ -12,16 +12,16 @@ export class GroupsService {
   constructor(private commService:CommService, private sharedDataService:SharedDataService) { 
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
   }
-  getGroups():Observable<Array<Group>>{
-    return this.commService.GetGroups(this.userName)
+  getGroups(userName:string):Observable<Array<Group>>{
+    return this.commService.GetGroups(userName)
   }
-  updateGroup(group:Group){
-    this.commService.UpdateGroup(this.userName,group)
+  updateGroup(userName:string,group:Group){
+    this.commService.UpdateGroup(userName,group)
   }
-  addGroup(group:Group){
-    this.commService.AddGroup(this.userName,group)
+  addGroup(userName:string,group:Group){
+    this.commService.AddGroup(userName,group)
   }
-  deleteGroup(group:Group){
-    this.commService.DeleteGroup(this.userName,group)
+  deleteGroup(userName:string,group:Group){
+    this.commService.DeleteGroup(userName,group)
   }
 }

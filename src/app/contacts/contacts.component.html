@@ -10,21 +10,15 @@
         </td>
         <td>
             <div *ngIf="selectedid>=0">
-                <form [formGroup]="selectContact" (ngSubmit)="onSubmit()">
+                <form [formGroup]="selectContact.form" (ngSubmit)="onSubmit()">
                     Name: <input id="name" formControlName="name" /><br />
-                    Groups: <div id="array" formArrayName="groups">
-                        <div *ngFor='let group of groups.controls;index as i'>
-                            <input [formControlName]="i" placeholder="groups">
-                            <button mat-mini-fab color="primary" type="button" (click)="remove('groups',i)">
-                                <mat-icon>remove</mat-icon>
-                            </button>
-                        </div>
-                        <div>
-                            <button mat-mini-fab color="primary" type="button" (click)="add('groups')">
-                                <mat-icon>plus_one</mat-icon>
-                            </button>
-                        </div>
-                    </div>
+                    Groups: <div *ngFor='let group of selectContact.groups'>
+                        {{group.groupName}}
+                        <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div><br/>
+                    <button>Add group</button><br/>
                     Image: <input type="file" (change)="onImgChose($event)" formControlName="image" /><br />
                     Mobile: <div id="array" formArrayName="mobile">
                         <div *ngFor='let mob of mobile.controls;index as i'>
