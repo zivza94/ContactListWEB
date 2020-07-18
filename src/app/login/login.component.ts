@@ -11,23 +11,35 @@ import { SharedDataService } from '../Services/shared-data.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup
   login: boolean = false
+  errorMsg: string = ""
 
-  constructor(private loginService: LoginService,private sharedDataService:SharedDataService) { }
+  constructor(private loginService: LoginService, private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup(
       {
-        userName: new FormControl(),
+        username: new FormControl(),
         password: new FormControl()
       }
     )
   }
   onSubmit() {
-    console.log("userName: " + this.loginForm.value.userName.value + " password: " + this.loginForm.value.password.value)
+    /*
+    //console.log("userName: " + this.loginForm.value.userName.value + " password: " + this.loginForm.value.password.value)
+    console.log(this.loginForm.value);
+    console.log(this.loginForm.value.username);
     /*this.loginService.Login(this.loginForm.value)
-    .subscribe(result => console.log(result))*/
+    .subscribe(result => console.log(result))
     this.login = true;
-    this.sharedDataService.changeMessage(this.loginForm.value.userName.value)
+    */
 
+    this.loginService.Login(this.loginForm.value.username, this.loginForm.value.password).
+      subscribe(result => {
+        if (result.status != "OK") {
+          this.errorMsg = result.message
+        } else {
+          this.login = true;
+        }
+      })
   }
 }
