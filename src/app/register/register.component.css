@@ -42,3 +42,6 @@ label{
 .input-group{
     margin-bottom: 18px;
 }
+.error-msg{
+    color: red;
+}

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { RegisterService } from '../Services/register.service';
+import { User } from '../DTO/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,8 @@ import { RegisterService } from '../Services/register.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup
   registerMsg: string = ""
-  constructor(private registerService: RegisterService) { }
+  errorMsg: string = ""
+  constructor(private registerService: RegisterService,private router: Router ) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup(
@@ -25,9 +28,23 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("userName: " + this.registerForm.value.username + " password: " + this.registerForm.value.password)
-    /*this.loginService.Login(this.loginForm.value)
-    .subscribe(result => console.log(result))*/
+    var userForm = this.registerForm.value
+    console.log("userName: " + userForm.username + " password: " + userForm.password)
+    if(userForm.password == userForm.passwordcheck){
+      var user = new User(userForm.firstname, userForm.lastname, 
+        userForm.username,userForm.password,[],[],[])
+      this.registerService.register(user).subscribe(
+        result => {
+          if (result.status == "OK") {
+            this.router.navigate(['/home'])
+          } else {
+            this.errorMsg = result.message
+          }
+        }
+      )
+    } else {
+      this.errorMsg ="password are not the same as password check"
+    }
   }
 
 }

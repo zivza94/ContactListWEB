@@ -44,3 +44,7 @@ h4 {
     color: grey;
     font-size: small;
 }
+
+.error-msg{
+    color: red;
+}

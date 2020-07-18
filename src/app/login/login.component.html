@@ -24,10 +24,10 @@
                         <button type="submit" class="btn btn-primary float-right login_btn">Login</button>
                     </form>
                     <a routerLink="/register"> don't have an account yet?</a>
-                    <div class="error-msg">
-                        {{loggedIn}}
+                    <div *ngIf="errorMsg!=''" class="error-msg">
+                        {{errorMsg}}
                     </div>
-                    <h4>{{errorMsg}}</h4>
+                    
                 </div>
             </div>
         </div>

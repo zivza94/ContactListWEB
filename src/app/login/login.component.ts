@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from '../Services/login.service';
 import { SharedDataService } from '../Services/shared-data.service';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -15,22 +16,16 @@ export class LoginComponent implements OnInit {
   errorMsg: string = ""
   userName: string
 
-  constructor(private loginService: LoginService, private sharedDataService: SharedDataService,
-    private router: Router) { }
+  constructor(private loginService: LoginService,private router: Router) { }
 
   ngOnInit(): void {
-    this.sharedDataService.currentMessage.subscribe(
-      msg => this.userName = msg
-    )
-
-    this.loginService.isAuthenticated().subscribe()
-
     this.loginForm = new FormGroup(
       {
-        username: new FormControl(),
-        password: new FormControl()
+        username: new FormControl("admin"),
+        password: new FormControl("admin")
       }
     )
+    
   }
   onSubmit() {
     /*
