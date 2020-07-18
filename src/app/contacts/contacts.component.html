@@ -18,7 +18,13 @@
                             <mat-icon>remove</mat-icon>
                         </button>
                     </div><br/>
-                    <button>Add group</button><br/>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select group</mat-label>
+                        <mat-select [(value)]="selectedGroup" >
+                            <mat-option *ngFor="let group of selectContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button (click)="addGroup(selectedGroup)">Add group</button><br/>
                     Image: <input type="file" (change)="onImgChose($event)" formControlName="image" /><br />
                     Mobile: <div id="array" formArrayName="mobile">
                         <div *ngFor='let mob of mobile.controls;index as i'>

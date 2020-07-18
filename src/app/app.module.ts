@@ -18,6 +18,7 @@ import { LocalCommService } from './Services/local-comm.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -40,6 +41,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatSelectModule,
     FontAwesomeModule
   ],
   providers: [{ provide: CommService, useClass: LocalCommService }],

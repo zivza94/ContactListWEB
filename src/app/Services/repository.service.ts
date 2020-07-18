@@ -21,11 +21,11 @@ export class RepositoryService {
     //create the groups
     var group = new Group(0,"1",[])
     this.AddGroup("admin",group)
-    group = new Group(1,"2",[])
+    var group = new Group(1,"2",[])
     this.AddGroup("admin",group)
-    group = new Group(2,"3",[])
+    var group = new Group(2,"3",[])
     this.AddGroup("admin",group)
-    group = new Group(3,"4",[])
+    var group = new Group(3,"4",[])
     this.AddGroup("admin",group)
     //create the contacts
     var contact1 = new Contact(1, "ziv", [group], null)
@@ -97,9 +97,6 @@ export class RepositoryService {
     contact.id = this.users[userName].idsConter[0]
     this.users[userName].idsConter[0]++
     this.users[userName].contacts.push(contact)
-    contact.groups.forEach(group => {
-      
-    });
   }
   DeleteContact(userName: string, contact: Contact) {
     //remove the contact from the groups
@@ -117,35 +114,13 @@ export class RepositoryService {
     group.contacts = newContacts
     this.ChangeGroupInUser(userName,group)
   }
-  /*
-  AddGroupToContact(userName:string,contact:Contact,group:Group){
-    contact.groups.push(group)
-    group.contacts.push(contact)
-    this.ChangeContactInUser(userName,contact)
-    this.ChangeGroupInUser(userName,group)
-  }
-  RemoveGroupFromContact(userName:string,contact:Contact,group:Group){
-    //remove the group from the contact
-    var newContact = contact.groups.filter(gro => gro.groupID != group.groupID)
-    contact.groups = newContact
-    //remove the contact from the group
-    var newGroup = group.contacts.filter(con => con.id != contact.id)
-    group.contacts = newGroup
-    //replace the contact and the group in the user
-    this.ChangeContactInUser(userName,contact)
-    this.ChangeGroupInUser(userName,group)
-
-  }*/
+  
   private ChangeGroupInUser(userName:string,group:Group){
     var groups = this.users[userName].groups.filter(gro => gro.groupID !== group.groupID)
     groups.push(group)
     this.users[userName].groups = groups
   }
-  private ChangeContactInUser(userName:string,contact:Contact){
-    var contacts = this.users[userName].contacts.filter(con =>con.id !== contact.id)
-    contacts.push(contact)
-    this.users[userName].contacts = contacts
-  }
+  
   /*generateID(userName:string,name:string):number{
     var id:number = name.length + this.users.get(userName).contacts.size + this.users.get(userName).contacts.size
     return id
@@ -196,21 +171,59 @@ export class RepositoryService {
     return this.users[userName].groups.sort(this.groupSorter)
   }
   AddGroup(userName: string, group: Group) {
-    group.groupID = this.users[userName].idsConter[0]
+    // add the group to contacts
+    group.contacts.forEach(contact => this.AddGroupToContact(userName,contact,group))
+    group.groupID = this.users[userName].idsConter[1]
     this.users[userName].idsConter[1]++
     this.users[userName].groups.push(group)
   }
   DeleteGroup(userName: string, group: Group) {
+    //remove from contacts
+    group.contacts.forEach(contact => this.RemoveGroupFromContact(userName,contact,group))
+    //delete from user
     var newArray = this.users[userName].groups.filter(el => el.groupID !== group.groupID)
     this.users[userName].groups = newArray
   }
   UpdateGroup(userName: string, group: Group) {
     var groups = this.users[userName].groups
+
+    // Update the contacts
+    var oldGroup:Group = groups.filter(gro => gro.groupId === group.groupID)[0]
+        //add groups
+    group.contacts.forEach(contact => {
+      if(oldGroup.contacts.indexOf(contact)!= -1){
+        this.AddGroupToContact(userName,contact,group)
+      }
+    })
+        //remove groups
+    oldGroup.contacts.forEach(contact => {
+      if(group.contacts.indexOf(contact) == -1){
+        this.RemoveContactFromGroup(userName,contact,group)
+      }
+    })
+
     var newGroup = groups.filter(gr => gr.groupID !== group.groupID)
     newGroup.push(group)
     this.users[userName].groups = newGroup
   }
 
+
+  private AddGroupToContact(userName:string,contact:Contact,group:Group){
+    contact.groups.push(group)
+    this.ChangeContactInUser(userName,contact)
+  }
+  private RemoveGroupFromContact(userName:string,contact:Contact,group:Group){
+    var newGroups = contact.groups.filter(gro => gro.groupID != group.groupID)
+    contact.groups = newGroups
+    this.ChangeContactInUser(userName,contact)
+  }
+  private ChangeContactInUser(userName:string,contact:Contact){
+    var contacts = this.users[userName].contacts.filter(con =>con.id !== contact.id)
+    contacts.push(contact)
+    this.users[userName].contacts = contacts
+  }
+
+  //Sorters
   private contactSorter(a:Contact, b:Contact){
     return a.name.localeCompare(b.name)
   }

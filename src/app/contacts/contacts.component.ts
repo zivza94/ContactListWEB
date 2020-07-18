@@ -18,9 +18,12 @@ export class ContactsComponent implements OnInit {
   contacts: Array<Contact> = new Array<Contact>()
   groups: Array<Group> = new Array<Group>()
   selectContact: ContactVM = new ContactVM
+  selectContactGroupsArray:Array<Group> = new Array()
   selectedContact: Contact
   selectedid: number = -1
   data: Array<string>
+  selectedGroup:Group
+
   constructor(private contactService: ContactService,
     private route: ActivatedRoute,private sharedDataService:SharedDataService,
     private groupService:GroupsService) { }
@@ -28,6 +31,7 @@ export class ContactsComponent implements OnInit {
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
     this.getcontacts()
+    this.getGroups()
   }
   getcontacts() {
     this.contactService.getContacts(this.userName)
@@ -44,6 +48,7 @@ export class ContactsComponent implements OnInit {
       this.selectContact = null
       this.selectedid = -1;
       this.selectedContact = null
+      this.selectContactGroupsArray = new Array()
     } else {
       this.selectedContact = contact
       var form = new FormGroup({
@@ -77,6 +82,7 @@ export class ContactsComponent implements OnInit {
       });
 
       this.selectedid = contact.id
+      this.selectContactGroupsArray = this.groups.filter(gro => this.selectContact.groups.indexOf(gro) == -1)
     }
   }
   onSubmit() {
@@ -95,9 +101,11 @@ export class ContactsComponent implements OnInit {
   }
   addGroup(group){
     this.selectContact.groups.push(group)
+    this.selectContactGroupsArray = this.groups.filter(gro => this.selectContact.groups.indexOf(gro) == -1)
   }
   removeGroup(group){
     this.selectContact.groups = this.selectedContact.groups.filter(gro => gro.groupID != group.groupID)
+    this.selectContactGroupsArray = this.groups.filter(gro => this.selectContact.groups.indexOf(gro) == -1)
   }
   /*get contactsArray():Array<Contact>{  
     var values = Object.values(this.contacts)
