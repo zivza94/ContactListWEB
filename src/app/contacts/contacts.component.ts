@@ -25,7 +25,7 @@ export class ContactsComponent implements OnInit {
     this.getcontacts()
   }
   getcontacts() {
-    this.contactService.getContacts()
+    this.contactService.getContacts(this.userName)
       .subscribe(contacts => 
         this.contacts = contacts)
   }
@@ -68,7 +68,7 @@ export class ContactsComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.contactService.updateContact(this.formToContact(this.selectContact))
+    this.contactService.updateContact(this.userName,this.formToContact(this.selectContact))
     this.getcontacts()
   }
   add(name: string) {

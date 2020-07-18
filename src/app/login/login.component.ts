@@ -23,12 +23,7 @@ export class LoginComponent implements OnInit {
       msg => this.userName = msg
     )
 
-    this.loginService.isAuthenticated(this.userName).subscribe(
-      result => {
-        if (result) {
-          this.router.navigate(['/home'])
-        }
-      })
+    this.loginService.isAuthenticated().subscribe()
 
     this.loginForm = new FormGroup(
       {
