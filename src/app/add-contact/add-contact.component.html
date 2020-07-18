@@ -3,42 +3,77 @@
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h2>Add Group</h2>
+                    <h2>Add Contact</h2>
                 </div>
                 <div class="card-body">
                     <form [formGroup]="addContact" (ngSubmit)="onSubmit()">
-                        <div class="input-group form-group">
+                        <div class="input-group form-group input-group-sm">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-users"></i></span>
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" formControlName="groupname"
-                                placeholder="Choose Group name">
+                            <input type="text" class="form-control" formControlName="contactname"
+                                placeholder="contanct name">
                         </div>
                         Choose Img:
-                        <div class="input-group form-group">
+                        <div class="input-group form-group input-group-sm">
                             <input type="file" (change)="onImgChose($event)" formControlName="image" />
                         </div>
-                        Add mobile number:
-                        <div class="input-group form-group">
-                            <div id="array" formArrayName="mobile">
-                                <div *ngFor='let mob of mobile.controls; let i = index'>
-                                    <input [formControlName]="i" />
+                        Add mobile numbers:
+                        <div id="array" formArrayName="mobile">
+                            <div *ngFor='let mob of mobile.controls; let i = index'>
+                                <div class="input-group form-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="i">
                                 </div>
-                                <button type="button" (click)="add('mobile')">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
                             </div>
+                            <button type="button" (click)="add('mobile')">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
                         </div>
-                        <div class="input-group form-group">
-
+                        Add Telephone numbers:
+                        <div id="array" formArrayName="telephone">
+                            <div *ngFor='let tel of telephone.controls;let i = index'>
+                                <div class="input-group form-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="i">
+                                </div>
+                            </div>
+                            <button type="button" (click)="add('telephone')">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
                         </div>
-                        <div class="input-group form-group">
-
+                        Add mail addresses:
+                        <div id="array" formArrayName="mail">
+                            <div *ngFor='let m of mail.controls;let i = index'>
+                                <div class="input-group form-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" formControlName="i">
+                                </div>
+                            </div>
+                            <button type="button" (click)="add('mail')">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
                         </div>
-                        <div class="input-group form-group">
-
+                        <br />
+                        <div class="input-group form-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-internet-explorer"></i></span>
+                            </div>
+                            <input type="text" class="form-control" formControlName="website"
+                                placeholder="website address">
                         </div>
-
+                        <div class="input-group form-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" formControlName="userName" placeholder="user name">
+                        </div>
                         <button type="submit" class="btn btn-primary float-right login_btn">Add</button>
                     </form>
                 </div>
