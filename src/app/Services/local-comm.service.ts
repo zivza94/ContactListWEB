@@ -13,18 +13,32 @@ import { Group } from '../DTO/groups';
 })
 export class LocalCommService extends CommService {
   
+  constructor(private repositoryService:RepositoryService) {
+    super();
+  }
+
+  //register
   Register(user:User):Observable<RegisterResponse> {
     return new Observable<RegisterResponse>(
       subscriber=>
       subscriber.next(this.repositoryService.Register(user))
     )
-  }
+  } 
+  //login
   Login(userName:string,password:string): Observable<LoginResponse> {
     return new Observable<LoginResponse> (
       subscriber =>
       subscriber.next(this.repositoryService.Login(userName,password))
     )
   }
+  isAuthenticated(userName:string): Observable<Boolean> {
+    return new Observable<Boolean>(
+      subscriber =>
+      subscriber.next(this.repositoryService.isAuthenticated(userName))
+    )
+  }
+
+  //contacts
   GetContacts(userName: string): Observable<Array<Contact>> {
     return new Observable<Array<Contact>> (
       subscriber => 
@@ -39,8 +53,8 @@ export class LocalCommService extends CommService {
   DeleteContact(userName:string,contact: Contact) {
     this.repositoryService.DeleteContact(userName,contact)
   }
-
-  GetGroups(userName: string): Observable<import("../DTO/groups").Group[]> {
+  //groups
+  GetGroups(userName: string): Observable<Array<Group>> {
     return new Observable<Array<Group>> (
       subscriber => 
       subscriber.next(this.repositoryService.GetGroups(userName)))
@@ -55,7 +69,5 @@ export class LocalCommService extends CommService {
     this.repositoryService.DeleteGroup(userName,group)
   }
   
-  constructor(private repositoryService:RepositoryService) {
-    super();
-  }
+  
 }
