@@ -1,3 +1,53 @@
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Add Group</h2>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="addContact" (ngSubmit)="onSubmit()">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-users"></i></span>
+                            </div>
+                            <input type="text" class="form-control" formControlName="groupname"
+                                placeholder="Choose Group name">
+                        </div>
+                        Choose Img:
+                        <div class="input-group form-group">
+                            <input type="file" (change)="onImgChose($event)" formControlName="image" />
+                        </div>
+                        Add mobile number:
+                        <div class="input-group form-group">
+                            <div id="array" formArrayName="mobile">
+                                <div *ngFor='let mob of mobile.controls; let i = index'>
+                                    <input [formControlName]="i" />
+                                </div>
+                                <button type="button" (click)="add('mobile')">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-group form-group">
+
+                        </div>
+                        <div class="input-group form-group">
+
+                        </div>
+                        <div class="input-group form-group">
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary float-right login_btn">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!--
 <form [formGroup]="addContact" (ngSubmit)="onSubmit()">
     Name: <input id="name" formControlName="name" /><br />
     Groups: <div id="array" formArrayName="groups">
@@ -40,3 +90,4 @@
     User name: <input id="userName" formControlName="userName" /><br />
     <button type="submit">Add</button>
 </form>
+-->
