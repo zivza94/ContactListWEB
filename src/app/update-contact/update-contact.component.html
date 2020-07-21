@@ -1,1 +1,58 @@
-<p>update-contact works!</p>
+<div *ngIf="contact"></div>
+
+<form [formGroup]="updateContact" (ngSubmit)="onSubmit()">
+    Name: <input id="name" formControlName="name" /><br />
+    Groups: <div *ngFor='let group of selectContact.groups'>
+        {{group.groupName}}
+        <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
+            <mat-icon>remove</mat-icon>
+        </button>
+    </div><br />
+    <mat-form-field appearance="fill">
+        <mat-label>Select group</mat-label>
+        <mat-select [(value)]="selectedGroup">
+            <mat-option *ngFor="let group of selectContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button (click)="addGroup(selectedGroup)">Add group</button><br />
+    Image: <input type="file" (change)="onImgChose($event)" formControlName="image" /><br />
+    Mobile: <div id="array" formArrayName="mobile">
+        <div *ngFor='let mob of mobile.controls;index as i'>
+            <input [formControlName]="i" placeholder="mobile">
+            <button mat-mini-fab color="primary" type="button" (click)="remove('mobile',i)">
+                <mat-icon>remove</mat-icon>
+            </button>
+        </div>
+        <button mat-mini-fab color="primary" type="button" (click)="add('mobile')">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+
+
+    </div>
+    Telephone: <div id="array" formArrayName="telephone">
+        <div *ngFor='let tel of telephone.controls;index as i'>
+            <input [formControlName]="i" placeholder="telephone">
+            <button mat-mini-fab color="primary" type="button" (click)="remove('telephone',i)">
+                <mat-icon>remove</mat-icon>
+            </button>
+        </div>
+        <button mat-mini-fab color="primary" type="button" (click)="add('telephone')">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+    </div>
+    Mail: <div id="array" formArrayName="mail">
+        <div *ngFor='let m of mail.controls;index as i'>
+            <input [formControlName]="i" placeholder="mail">
+            <button mat-mini-fab color="primary" type="button" (click)="remove('mail',i)">
+                <mat-icon>remove</mat-icon>
+            </button>
+        </div>
+        <button mat-mini-fab color="primary" type="button" (click)="add('mail')">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+    </div>
+    Website: <input id="website" formControlName="website" /><br />
+    Address: <input id="address" formControlName="address" /><br />
+    User name: <input id="userName" formControlName="userName" /><br />
+    <button type="submit">Update contact</button>
+</form>

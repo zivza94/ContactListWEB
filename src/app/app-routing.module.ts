@@ -8,6 +8,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { HomeComponent } from './home/home.component';
+import { UpdateContactComponent } from './update-contact/update-contact.component';
 
 const routes: Routes = [
   { path: "", component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: "groups", component: GroupsComponent, canActivate: [RegGuardService] },
   { path: "contacts", component: ContactsComponent, canActivate: [RegGuardService] },
   { path: "addcontact", component: AddContactComponent },
-  { path: "addgroup", component: AddGroupComponent }
+  { path: "addgroup", component: AddGroupComponent },
+  { path: "updatecontact", component: UpdateContactComponent }
 ];
 
 @NgModule({

@@ -94,7 +94,8 @@
                     <td>
                         &nbsp;
                         <a><i class="fa fa-trash" (click)="removeContact(contact)">&nbsp;&nbsp;&nbsp;&nbsp;</i></a>
-                        <a><i class="fa fa-pencil" (click)="editContact(contact)"></i></a>
+                        <a><i class="fa fa-pencil" [class.selected]="contact === selectedContact"
+                                (click)="onSelect(contact) "></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -104,7 +105,13 @@
         <app-contact-detail [contact]="selectedContact"></app-contact-detail>
     </div>
 
-
+    <!--
+    <div *ngIf="selectedContact.id>=5">
+        <div id="update">
+            <app-update-contact [contact]="selectedContact"></app-update-contact>
+        </div>
+    </div>
+    -->
 </body>
 
 <!--

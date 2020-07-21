@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Contact } from '../DTO/contact';
+import { ContactService } from '../Services/contact.service';
+import { ActivatedRoute } from '@angular/router';
+import { GroupsService } from '../Services/groups.service';
+import { SharedDataService } from '../Services/shared-data.service';
 
 @Component({
   selector: 'app-add-group',
@@ -9,22 +13,27 @@ import { Contact } from '../DTO/contact';
 })
 export class AddGroupComponent implements OnInit {
   groupForm: FormGroup
+  userName: string
   contacts: Array<Contact> = new Array<Contact>()
-  constructor() {
-    var contact1 = new Contact(1, "ziv", [], null)
-    var contact2 = new Contact(2, "david", [], null)
-    var contact3 = new Contact(3, "ash", [], null)
-    this.contacts.push(contact1)
-    this.contacts.push(contact2)
-    this.contacts.push(contact3)
-  }
+  constructor(private contactService: ContactService,
+    private route: ActivatedRoute, private sharedDataService: SharedDataService,
+    private groupService: GroupsService) { }
 
   ngOnInit(): void {
+    this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
+    this.getcontacts()
     this.groupForm = new FormGroup(
       {
         groupName: new FormControl
       })
   }
+
+  getcontacts() {
+    this.contactService.getContacts(this.userName)
+      .subscribe(contacts =>
+        this.contacts = contacts)
+  }
+
   addGroup() {
   }
 
