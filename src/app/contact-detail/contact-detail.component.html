@@ -1,0 +1,52 @@
+<div *ngIf="contact">
+
+    <h2>{{contact.name | uppercase}} Details</h2>
+    {{contact.image}}
+    <div>
+        <i class="fa fa-circle"></i>
+        &nbsp;
+        <span><b>id: </b></span>{{contact.id}}
+    </div>
+    <div>
+        <i class="fa fa-circle"></i>
+        &nbsp;
+        <span><b>name: </b></span>{{contact.name}}
+    </div>
+    <div>
+        <i class="fa fa-user"></i>
+        &nbsp;
+        <span><b>user name: </b></span>{{contact.userName}}
+    </div>
+    <div>
+        <i class="fa fa-internet-explorer"></i>
+        &nbsp;
+        <span><b>website: </b></span>{{contact.website}}
+    </div>
+    <div>
+        <i class="fa fa-circle"></i>
+        &nbsp;
+        <span><b>address: </b></span>{{contact.address}}
+    </div>
+    <div>
+        <i class="fa fa-at"></i>
+        &nbsp;
+        <span><b>emails: </b></span>{{contact.mail}}
+    </div>
+    <div>
+        <i class="fa fa-phone"></i>
+        &nbsp;
+        <span><b>telephone numbers: </b></span>{{contact.telephone}}
+    </div>
+    <div>
+        <i class="fa fa-mobile"></i>
+        &nbsp;
+        <span><b>mobile numbers: </b></span>{{contact.mobile}}
+    </div>
+
+    <div>
+        <i class="fa fa-users">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+        &nbsp;
+        <span><b>groups: </b></span>{{contact.groups}}
+    </div>
+
+</div>

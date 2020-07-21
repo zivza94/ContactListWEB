@@ -14,19 +14,19 @@ import { ContactVM } from '../VM/contact-vm';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  userName:string
+  userName: string
   contacts: Array<Contact> = new Array<Contact>()
   groups: Array<Group> = new Array<Group>()
   selectContact: ContactVM = new ContactVM
-  selectContactGroupsArray:Array<Group> = new Array()
+  selectContactGroupsArray: Array<Group> = new Array()
   selectedContact: Contact
   selectedid: number = -1
   data: Array<string>
-  selectedGroup:Group
+  selectedGroup: Group
 
   constructor(private contactService: ContactService,
-    private route: ActivatedRoute,private sharedDataService:SharedDataService,
-    private groupService:GroupsService) { }
+    private route: ActivatedRoute, private sharedDataService: SharedDataService,
+    private groupService: GroupsService) { }
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
@@ -35,10 +35,10 @@ export class ContactsComponent implements OnInit {
   }
   getcontacts() {
     this.contactService.getContacts(this.userName)
-      .subscribe(contacts => 
+      .subscribe(contacts =>
         this.contacts = contacts)
   }
-  getGroups(){
+  getGroups() {
     this.groupService.getGroups(this.userName).subscribe(
       groups => this.groups = groups
     )
@@ -86,7 +86,7 @@ export class ContactsComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.contactService.updateContact(this.userName,this.formToContact(this.selectContact))
+    this.contactService.updateContact(this.userName, this.formToContact(this.selectContact))
     this.getcontacts()
   }
   add(name: string) {
@@ -94,16 +94,16 @@ export class ContactsComponent implements OnInit {
     var f: FormArray = this.selectContact.form.get(name) as FormArray
     f.push(new FormControl())
   }
-  remove(name: string,index:number){
+  remove(name: string, index: number) {
     console.log("add taped")
     var f: FormArray = this.selectContact.form.get(name) as FormArray
     f.removeAt(index)
   }
-  addGroup(group){
+  addGroup(group) {
     this.selectContact.groups.push(group)
     this.selectContactGroupsArray = this.groups.filter(gro => this.selectContact.groups.indexOf(gro) == -1)
   }
-  removeGroup(group){
+  removeGroup(group) {
     this.selectContact.groups = this.selectedContact.groups.filter(gro => gro.groupID != group.groupID)
     this.selectContactGroupsArray = this.groups.filter(gro => this.selectContact.groups.indexOf(gro) == -1)
   }
@@ -127,8 +127,8 @@ export class ContactsComponent implements OnInit {
   onImgChose(event) {
     console.log(event)
   }
-  formToContact(cont:{form:FormGroup,groups:Array<Group>}): Contact{
-    var contact = new Contact(this.selectedid,cont.form.get('name').value,cont.groups,cont.form.get('image').value)
+  formToContact(cont: { form: FormGroup, groups: Array<Group> }): Contact {
+    var contact = new Contact(this.selectedid, cont.form.get('name').value, cont.groups, cont.form.get('image').value)
     contact.mobile = cont.form.get('mobile').value
     contact.telephone = cont.form.get('telephone').value
     contact.mail = cont.form.get('mail').value
@@ -137,10 +137,20 @@ export class ContactsComponent implements OnInit {
     contact.userName = cont.form.get('userName').value
     return contact
   }
-  groupFormArrayToArray(form:FormArray):Array<Group>{
+  groupFormArrayToArray(form: FormArray): Array<Group> {
     var groups = new Array<Group>()
     form.controls.forEach(group => groups.push(group.value))
     return groups
+  }
+
+  onSelect(contact: Contact): void {
+    this.selectedContact = contact;
+  }
+  removeContact(contact: Contact): void {
+    console.log("remove " + contact.name);
+  }
+  editContact(contact: Contact): void {
+    console.log("edit " + contact.name);
   }
 }
 

@@ -1,5 +1,7 @@
+<!--
 <button (click)="getcontacts()">getContacts</button>
-<table border=1>
+-->
+<!--<table border=1>
     <tr>
         <div class="contactsList"></div>
         <td>
@@ -69,5 +71,50 @@
         </td>
 
     </tr>
-</table>
-<button routerLink="/addcontact">Add Contact</button>
+</table> 
+-->
+
+<body>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Phone numbers</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contact of contacts" [class.selected]="contact === selectedContact"
+                    (click)="onSelect(contact)">
+                    <td><img src="contact.image"></td>
+                    <td> {{ contact.name }}</td>
+                    <td> {{ contact.mobile }}</td>
+                    <td>
+                        &nbsp;
+                        <a><i class="fa fa-trash" (click)="removeContact(contact)">&nbsp;&nbsp;&nbsp;&nbsp;</i></a>
+                        <a><i class="fa fa-pencil" (click)="editContact(contact)"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="details">
+        <app-contact-detail [contact]="selectedContact"></app-contact-detail>
+    </div>
+
+
+</body>
+
+<!--
+    <button routerLink="/addcontact">Add Contact</button>
+<ul class = "contatcs">
+<ng-container *ngFor="let contact of contacts">
+    [class.selected]="contact == selectedContact"
+    (click)="onSelect(contact)"
+    <img src="contact.image" alt="Picture">
+    <button id="contact.id" (click)="showContact(contact)">{{contact.name}}</button><br />
+</ng-container>
+</ul>
+-->

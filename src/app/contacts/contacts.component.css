@@ -1,3 +1,11 @@
+body {
+    background-image: url('http://getwallpapers.com/wallpaper/full/4/b/7/235248.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 150%;
+    font-family: 'Numans', sans-serif;
+}
+
 .contactsList{
     min-height: 300px;
 }
@@ -8,6 +16,7 @@ tr{
 td{
     min-width: 100px;
 }
-#array{
-    text-align: center;
+#details{
+    margin-left: 35%;
 }
+

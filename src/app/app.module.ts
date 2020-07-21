@@ -20,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ContactDetailComponent } from './contact-detail/contact-detail.component';
+import { UpdateContactComponent } from './update-contact/update-contact.component';
+import { FormsModule } from '@angular/forms';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -33,12 +36,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HomeComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ContactDetailComponent,
+    UpdateContactComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatSelectModule,
