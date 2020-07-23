@@ -6,8 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddContactComponent } from './add-contact/add-contact.component';
 import { AddGroupComponent } from './add-group/add-group.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { GroupsComponent } from './groups/groups.component';
+import { ContactsComponent } from './contacts-list/contacts-list.component';
+import { GroupsComponent } from './groups-list/groups-list.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -23,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { UpdateContactComponent } from './update-contact/update-contact.component';
 import { FormsModule } from '@angular/forms';
+import { GroupDetailComponent } from './group-detail/group-detail.component';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     LogoutComponent,
     RegisterComponent,
     ContactDetailComponent,
-    UpdateContactComponent
+    UpdateContactComponent,
+    GroupDetailComponent
   ],
   imports: [
     BrowserModule,

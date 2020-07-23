@@ -10,8 +10,8 @@ import { ContactVM } from '../VM/contact-vm';
 
 @Component({
   selector: 'app-contacts',
-  templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.css']
+  templateUrl: './contacts-list.component.html',
+  styleUrls: ['./contacts-list.component.css']
 })
 export class ContactsComponent implements OnInit {
   userName: string

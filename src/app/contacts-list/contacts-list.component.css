@@ -1,0 +1,36 @@
+body {
+    background-image: url('http://getwallpapers.com/wallpaper/full/4/b/7/235248.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 150%;
+    font-family: 'Numans', sans-serif;
+}
+
+tr{
+    text-align: left;
+    align-content: initial;
+}
+td{
+    min-width: 100px;
+}
+#details{
+    height: 150px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: rgba(109, 93, 93, 0.5);
+    font-size: small;
+    color:rgb(0, 0, 0);
+    border: black;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}

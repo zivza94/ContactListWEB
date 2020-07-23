@@ -39,6 +39,8 @@ export class RepositoryService {
     this.AddContact("admin", contact2)
     this.AddContact("admin", contact3)
 
+    var group = new Group(4, "5", [contact1])
+    this.AddGroup("admin", group)
 
     var contact1 = new Contact(4, "bob", [], null)
     this.AddContact("admin", contact1)

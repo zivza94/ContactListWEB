@@ -1,0 +1,105 @@
+<!--<button routerLink="/addgroup">Add Group</button>-->
+
+<!--
+<div *ngFor="let group of groups; let i=index" class="panel panel-group" role="tablist">
+    <div id="accordion" class="panel panel-default">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href=" {{'#collapseListGroup' + i}}"
+                    aria-expanded="true" aria-controls="collapseListGroup1">{{group.groupName}}
+                </a>
+            </h4>
+            <div id="{{'collapseListGroup' + i}}" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
+                <ul class="list-group">
+                    <li *ngFor="let contact of group.contacts">
+                        {{contact.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<!--
+<div *ngFor="let group of groups; let i=index" class="panel panel-group" role="tablist">
+    <div id="accordion" class="panel panel-default">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href=" {{'#collapseListGroup' + i}}"
+                    aria-expanded="true" aria-controls="collapseListGroup1">{{group.groupName}}
+                </a>
+            </h4>
+            <div id="{{'collapseListGroup' + i}}" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="collapseListGroupHeading1" aria-expanded="true"
+                [class.selected]="group === selectedGroup" (click)="onSelect(group)">
+                <ul class="list-group">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let group of groups">
+        {{group.groupName}}
+    </li>
+</ul>
+<app-group-detail [group]="selectedGroup"></app-group-detail>
+<!--
+<div id="accordion" class="panel panel-group" role="tablist">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
+            <h4 class="panel-title">
+                <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseListGroup1"
+                    aria-expanded="true" aria-controls="collapseListGroup1"> Collapsible list group #1</a>
+            </h4>
+        </div>
+        <div id="collapseListGroup1" class="panel-collapse collapse" role="tabpanel"
+            aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
+            <ul class="list-group">
+                <li class="list-group-item">Bootply</li>
+                <li class="list-group-item">One itmus ac facilin</li>
+                <li class="list-group-item">Second eros</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapseListGroupHeading2">
+            <h4 class="panel-title">
+                <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseListGroup2"
+                    aria-expanded="true" aria-controls="collapseListGroup2"> Collapsible list group #2</a>
+            </h4>
+        </div>
+        <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel"
+            aria-labelledby="collapseListGroupHeading2" aria-expanded="true">
+            <ul class="list-group">
+                <li class="list-group-item">Bootply</li>
+                <li class="list-group-item">One itmus ac facilin</li>
+                <li class="list-group-item">Second eros</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapseListGroupHeading3">
+            <h4 class="panel-title">
+                <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseListGroup3"
+                    aria-expanded="true" aria-controls="collapseListGroup3"> Collapsible list group #3</a>
+            </h4>
+        </div>
+        <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel"
+            aria-labelledby="collapseListGroupHeading3" aria-expanded="true">
+            <ul class="list-group">
+                <li class="list-group-item">Bootply</li>
+                <li class="list-group-item">One itmus ac facilin</li>
+                <li class="list-group-item">Second eros</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+-->
