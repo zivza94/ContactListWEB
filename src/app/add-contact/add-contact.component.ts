@@ -4,6 +4,7 @@ import { CommService } from '../Services/comm.service';
 import { Location } from '@angular/common'
 import { ContactService } from '../Services/contact.service';
 import { Contact } from '../DTO/contact';
+import { SharedDataService } from '../Services/shared-data.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -12,11 +13,14 @@ import { Contact } from '../DTO/contact';
 })
 export class AddContactComponent implements OnInit {
   addContact: FormGroup
-  constructor(private contactService: ContactService, private location: Location) { }
+  userName: string
+  constructor(private contactService: ContactService, private location: Location,
+    private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
+    this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
     this.addContact = new FormGroup({
-      name: new FormControl("", Validators.required),//name
+      contactname: new FormControl("", Validators.required),//name
       groups: new FormArray([]),//groups
       image: new FormControl(),//image
       mobile: new FormArray([]),//mobile
@@ -34,7 +38,7 @@ export class AddContactComponent implements OnInit {
 
   onSubmit() {
     console.log("sumbit")
-    //this.contactService.addContact(this.userName,this.formToContact(this.addContact))
+    this.contactService.addContact(this.userName, this.formToContact(this.addContact))
     this.location.back()
   }
 

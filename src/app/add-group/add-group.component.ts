@@ -5,6 +5,7 @@ import { ContactService } from '../Services/contact.service';
 import { ActivatedRoute } from '@angular/router';
 import { GroupsService } from '../Services/groups.service';
 import { SharedDataService } from '../Services/shared-data.service';
+import { Group } from '../DTO/groups';
 
 @Component({
   selector: 'app-add-group',
@@ -34,9 +35,8 @@ export class AddGroupComponent implements OnInit {
         this.contacts = contacts)
   }
 
-  addGroup() {
-  }
-
   onSubmit() {
+    var group = new Group(6, "Liza's", [])
+    this.groupService.addGroup(this.userName, group);
   }
 }
