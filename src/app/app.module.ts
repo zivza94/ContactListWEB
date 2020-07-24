@@ -24,6 +24,8 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import { UpdateContactComponent } from './update-contact/update-contact.component';
 import { FormsModule } from '@angular/forms';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
+import {MatCardModule} from '@angular/material/card'
+
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -50,7 +52,8 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatSelectModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatCardModule
   ],
   providers: [{ provide: CommService, useClass: LocalCommService }],
   bootstrap: [AppComponent]

@@ -6,7 +6,7 @@
                     <h2>Add Contact</h2>
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="addContact" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="addContact.form" (ngSubmit)="onSubmit()">
                         <div class="input-group form-group input-group-sm">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
@@ -14,18 +14,32 @@
                             <input type="text" class="form-control" formControlName="contactname"
                                 placeholder="contanct name">
                         </div>
+                        Groups: <div *ngFor='let group of addContact.groups'>
+                            {{group.groupName}}
+                            <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div><br/>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select group</mat-label>
+                            <mat-select [(value)]="selectedGroup"  >
+                                <mat-option *ngFor="let group of addContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button type="button" (click)="addGroup(selectedGroup)">Add group</button><br/>
                         Choose Img:
                         <div class="input-group form-group input-group-sm">
                             <input type="file" (change)="onImgChose($event)" formControlName="image" />
                         </div>
+                        
                         Add mobile numbers:
                         <div id="array" formArrayName="mobile">
-                            <div *ngFor='let mob of mobile.controls; let i = index'>
+                            <div *ngFor='let mob of mobile.controls'>
                                 <div class="input-group form-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-mobile"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="i">
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
                             <button type="button" (click)="add('mobile')">
@@ -34,12 +48,12 @@
                         </div>
                         Add Telephone numbers:
                         <div id="array" formArrayName="telephone">
-                            <div *ngFor='let tel of telephone.controls;let i = index'>
+                            <div *ngFor='let tel of telephone.controls'>
                                 <div class="input-group form-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-phone"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="i">
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
                             <button type="button" (click)="add('telephone')">
@@ -48,12 +62,12 @@
                         </div>
                         Add mail addresses:
                         <div id="array" formArrayName="mail">
-                            <div *ngFor='let m of mail.controls;let i = index'>
+                            <div *ngFor='let m of mail.controls'>
                                 <div class="input-group form-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-at"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" formControlName="i">
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
                             <button type="button" (click)="add('mail')">

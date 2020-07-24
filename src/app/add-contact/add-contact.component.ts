@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { CommService } from '../Services/comm.service';
 import { Location } from '@angular/common'
 import { ContactService } from '../Services/contact.service';
 import { Contact } from '../DTO/contact';
 import { SharedDataService } from '../Services/shared-data.service';
+import { Group } from '../DTO/groups';
+import { ContactVM } from '../VM/contact-vm';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GroupsService } from '../Services/groups.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -12,16 +16,25 @@ import { SharedDataService } from '../Services/shared-data.service';
   styleUrls: ['./add-contact.component.css']
 })
 export class AddContactComponent implements OnInit {
-  addContact: FormGroup
+  //addContact: FormGroup
+  addContact: ContactVM = new ContactVM
   userName: string
+  addContactGroupsArray: Array<Group> = new Array()
+  selectedGroup:Group
+  @Input() groups:Array<Group>
+  
+  
   constructor(private contactService: ContactService, private location: Location,
-    private sharedDataService: SharedDataService) { }
+    private sharedDataService: SharedDataService, private groupsService:GroupsService) {
+      
+     }
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
-    this.addContact = new FormGroup({
-      contactname: new FormControl("", Validators.required),//name
-      groups: new FormArray([]),//groups
+    this.groupsService.getGroups(this.userName).subscribe(groups =>this.groups = groups)
+    var form = new FormGroup({
+      contactname: new FormControl(),//name
+      //groups: new FormArray([]),//groups
       image: new FormControl(),//image
       mobile: new FormArray([]),//mobile
       telephone: new FormArray([]),//telephone
@@ -30,6 +43,21 @@ export class AddContactComponent implements OnInit {
       address: new FormControl(),//address
       userName: new FormControl()//userName
     })
+    this.addContact.form = form
+    this.addContact.groups = new Array<Group>()
+    this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
+
+    /*this.addContact = new FormGroup({
+      contactname: new FormControl("", Validators.required),//name
+      //groups: new FormArray([]),//groups
+      image: new FormControl(),//image
+      mobile: new FormArray([]),//mobile
+      telephone: new FormArray([]),//telephone
+      mail: new FormArray([]),//mail
+      website: new FormControl(),//website
+      address: new FormControl(),//address
+      userName: new FormControl()//userName
+    })*/
   }
 
   onImgChose(event) {
@@ -40,15 +68,24 @@ export class AddContactComponent implements OnInit {
     console.log("sumbit")
     this.contactService.addContact(this.userName, this.formToContact(this.addContact))
     this.location.back()
+
   }
 
   add(name: string) {
     console.log("add taped")
-    var f: FormArray = this.addContact.get(name) as FormArray
+    var f: FormArray = this.addContact.form.get(name) as FormArray
     f.push(new FormControl())
   }
+  addGroup(group) {
+    this.addContact.groups.push(group)
+    this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
+  }
+  removeGroup(group) {
+    this.addContact.groups = this.addContact.groups.filter(gro => gro.groupID != group.groupID)
+    this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
+  }
 
-  formToContact(form: FormGroup): Contact {
+  /*formToContact(form: FormGroup): Contact {
     var contact = new Contact(0, form.get('name').value, form.get('groups').value, form.get('image').value)
     contact.address = form.get('address').value
     contact.mobile = form.get('mobile').value
@@ -56,17 +93,27 @@ export class AddContactComponent implements OnInit {
     contact.website = form.get('website').value
     contact.userName = form.get('userName').value
     return contact
+  }*/
+  formToContact(cont:ContactVM): Contact {
+    var contact = new Contact(0, cont.form.get('contactname').value, cont.groups, cont.form.get('image').value)
+    contact.mobile = cont.form.get('mobile').value
+    contact.telephone = cont.form.get('telephone').value
+    contact.mail = cont.form.get('mail').value
+    contact.address = cont.form.get('address').value
+    contact.website = cont.form.get('website').value
+    contact.userName = cont.form.get('userName').value
+    return contact
   }
   get mobile(): FormArray {
-    return this.addContact.get('mobile') as FormArray;
+    return this.addContact.form.get('mobile') as FormArray;
   }
-  get groups(): FormArray {
+  /*get groups(): FormArray {
     return this.addContact.get('groups') as FormArray;
-  }
+  }*/
   get mail(): FormArray {
-    return this.addContact.get('mail') as FormArray;
+    return this.addContact.form.get('mail') as FormArray;
   }
   get telephone(): FormArray {
-    return this.addContact.get('telephone') as FormArray;
+    return this.addContact.form.get('telephone') as FormArray;
   }
 }

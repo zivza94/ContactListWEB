@@ -44,9 +44,12 @@
     </div>
 
     <div>
-        <i class="fa fa-users">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+        <i class="fa fa-users"></i>
         &nbsp;
-        <span><b>groups: </b></span>{{contact.groups}}
+        <span><b>groups: </b></span>
+        <span *ngFor="let group of contact.groups">
+            {{group.groupName}}
+        </span>
     </div>
 
 </div>

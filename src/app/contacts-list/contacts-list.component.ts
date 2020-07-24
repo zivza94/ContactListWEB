@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { ContactService } from '../Services/contact.service';
 import { Contact } from '../DTO/contact';
 import { ActivatedRoute } from '@angular/router';
@@ -147,6 +147,8 @@ export class ContactsComponent implements OnInit {
     this.selectedContact = contact;
   }
   removeContact(contact: Contact): void {
+    this.contactService.deleteContact(this.userName,contact)
+    this.getcontacts();
     console.log("remove " + contact.name);
   }
   editContact(contact: Contact): void {
