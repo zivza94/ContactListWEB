@@ -13,7 +13,7 @@ import { CdkScrollableModule } from '@angular/cdk/scrolling';
   styleUrls: ['./groups-list.component.css']
 })
 export class GroupsComponent implements OnInit {
-
+  selectedContact:Contact
   selectedGroup: Group
   userName: string
   clickedGroup: string
@@ -43,6 +43,9 @@ export class GroupsComponent implements OnInit {
     } else {
       this.selectedGroup = group;
     }
+  }
+  onSelectContact(contact: Contact){
+    this.selectedContact = contact
   }
 
 }
