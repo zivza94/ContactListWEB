@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { ContactService } from '../Services/contact.service';
 import { Contact } from '../DTO/contact';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { SharedDataService } from '../Services/shared-data.service';
 import { Group } from '../DTO/groups';
@@ -25,7 +25,7 @@ export class ContactsComponent implements OnInit {
   selectedGroup: Group
 
   constructor(private contactService: ContactService,
-    private route: ActivatedRoute, private sharedDataService: SharedDataService,
+    private route: Router, private sharedDataService: SharedDataService,
     private groupService: GroupsService) { }
 
   ngOnInit(): void {
@@ -35,13 +35,17 @@ export class ContactsComponent implements OnInit {
   }
   getcontacts() {
     this.contactService.getContacts(this.userName)
-      .subscribe(contacts =>
-        this.contacts = contacts)
+      .subscribe(contacts =>{
+        this.contacts = contacts
+        this.sharedDataService.changeContacts(contacts)
+      })
   }
   getGroups() {
     this.groupService.getGroups(this.userName).subscribe(
-      groups => this.groups = groups
-    )
+      groups => {
+        this.groups = groups
+        this.sharedDataService.changeGroups(groups)
+    })
   }
   showContact(contact: Contact) {
     if (this.selectedid == contact.id) {
@@ -53,7 +57,6 @@ export class ContactsComponent implements OnInit {
       this.selectedContact = contact
       var form = new FormGroup({
         name: new FormControl(contact.name),//name
-        //groups: new FormArray([]),//groups
         image: new FormControl(contact.image),//image
         mobile: new FormArray([]),//mobile
         telephone: new FormArray([]),//telephone
@@ -152,7 +155,9 @@ export class ContactsComponent implements OnInit {
     console.log("remove " + contact.name);
   }
   editContact(contact: Contact): void {
-    console.log("edit " + contact.name);
+    this.sharedDataService.changeContact(contact)
+    console.log("Clicked edit contact" + contact.name);
+    this.route.navigate(['/updatecontact'])
   }
 }
 

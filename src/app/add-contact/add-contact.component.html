@@ -34,12 +34,15 @@
                         
                         Add mobile numbers:
                         <div id="array" formArrayName="mobile">
-                            <div *ngFor='let mob of mobile.controls'>
+                            <div *ngFor='let mob of mobile.controls;index as i'>
                                 <div class="input-group form-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-mobile"></i></span>
                                     </div>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" [formControlName]="i" placeholder="mobile">
+                                    <button mat-mini-fab color="primary" type="button" (click)="remove('mobile',i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
                                 </div>
                             </div>
                             <button type="button" (click)="add('mobile')">
@@ -48,12 +51,15 @@
                         </div>
                         Add Telephone numbers:
                         <div id="array" formArrayName="telephone">
-                            <div *ngFor='let tel of telephone.controls'>
+                            <div *ngFor='let tel of telephone.controls;index as i'>
                                 <div class="input-group form-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-phone"></i></span>
                                     </div>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control"  [formControlName]="i" placeholder="telephone">
+                                    <button mat-mini-fab color="primary" type="button" (click)="remove('telephone',i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
                                 </div>
                             </div>
                             <button type="button" (click)="add('telephone')">
@@ -62,12 +68,15 @@
                         </div>
                         Add mail addresses:
                         <div id="array" formArrayName="mail">
-                            <div *ngFor='let m of mail.controls'>
+                            <div *ngFor='let m of mail.controls;index as i'>
                                 <div class="input-group form-group input-group-sm">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-at"></i></span>
                                     </div>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" [formControlName]="i" placeholder="mail">
+                                    <button mat-mini-fab color="primary" type="button" (click)="remove('mail',i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
                                 </div>
                             </div>
                             <button type="button" (click)="add('mail')">

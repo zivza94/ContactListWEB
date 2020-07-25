@@ -1,60 +1,109 @@
-<div *ngIf="contact"></div>
-<!--
-<form [formGroup]="updateContact" (ngSubmit)="onSubmit()">
-    Name: <input id="name" formControlName="name" /><br />
-    Groups: <div *ngFor='let group of selectContact.groups'>
-        {{group.groupName}}
-        <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
-            <mat-icon>remove</mat-icon>
-        </button>
-    </div><br />
-    <mat-form-field appearance="fill">
-        <mat-label>Select group</mat-label>
-        <mat-select [(value)]="selectedGroup">
-            <mat-option *ngFor="let group of selectContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <button (click)="addGroup(selectedGroup)">Add group</button><br />
-    Image: <input type="file" (change)="onImgChose($event)" formControlName="image" /><br />
-    Mobile: <div id="array" formArrayName="mobile">
-        <div *ngFor='let mob of mobile.controls;index as i'>
-            <input [formControlName]="i" placeholder="mobile">
-            <button mat-mini-fab color="primary" type="button" (click)="remove('mobile',i)">
-                <mat-icon>remove</mat-icon>
-            </button>
-        </div>
-        <button mat-mini-fab color="primary" type="button" (click)="add('mobile')">
-            <mat-icon>plus_one</mat-icon>
-        </button>
 
-
-    </div>
-    Telephone: <div id="array" formArrayName="telephone">
-        <div *ngFor='let tel of telephone.controls;index as i'>
-            <input [formControlName]="i" placeholder="telephone">
-            <button mat-mini-fab color="primary" type="button" (click)="remove('telephone',i)">
-                <mat-icon>remove</mat-icon>
-            </button>
+    <body>
+        <div class="container">
+            <div class="d-flex justify-content-center h-100">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Update Contact</h2>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="updateContact.form" (ngSubmit)="onSubmit()">
+                            <div class="input-group form-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" formControlName="contactname"
+                                    placeholder="contanct name">
+                            </div>
+                            Groups: <div *ngFor='let group of updateContact.groups'>
+                                {{group.groupName}}
+                                <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </div><br/>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select group</mat-label>
+                                <mat-select [(value)]="selectedGroup"  >
+                                    <mat-option *ngFor="let group of updateContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button type="button" (click)="addGroup(selectedGroup)">Add group</button><br/>
+                            Choose Img:
+                            <div class="input-group form-group input-group-sm">
+                                <input type="file" (change)="onImgChose($event)" formControlName="image" />
+                            </div>
+                            
+                            Add mobile numbers:
+                        <div id="array" formArrayName="mobile">
+                            <div *ngFor='let mob of mobile.controls;index as i'>
+                                <div class="input-group form-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" [formControlName]="i" placeholder="mobile">
+                                    <button mat-mini-fab color="primary" type="button" (click)="remove('mobile',i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <button type="button" (click)="add('mobile')">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        Add Telephone numbers:
+                        <div id="array" formArrayName="telephone">
+                            <div *ngFor='let tel of telephone.controls;index as i'>
+                                <div class="input-group form-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control"  [formControlName]="i" placeholder="telephone">
+                                    <button mat-mini-fab color="primary" type="button" (click)="remove('telephone',i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" (click)="add('telephone')">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        Add mail addresses:
+                        <div id="array" formArrayName="mail">
+                            <div *ngFor='let m of mail.controls;index as i'>
+                                <div class="input-group form-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" [formControlName]="i" placeholder="mail">
+                                    <button mat-mini-fab color="primary" type="button" (click)="remove('mail',i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" (click)="add('mail')">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                            <br />
+                            <div class="input-group form-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-internet-explorer"></i></span>
+                                </div>
+                                <input type="text" class="form-control" formControlName="website"
+                                    placeholder="website address">
+                            </div>
+                            <div class="input-group form-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control" formControlName="userName" placeholder="user name">
+                            </div>
+                            <button type="submit" class="btn btn-primary float-right login_btn">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button mat-mini-fab color="primary" type="button" (click)="add('telephone')">
-            <mat-icon>plus_one</mat-icon>
-        </button>
-    </div>
-    Mail: <div id="array" formArrayName="mail">
-        <div *ngFor='let m of mail.controls;index as i'>
-            <input [formControlName]="i" placeholder="mail">
-            <button mat-mini-fab color="primary" type="button" (click)="remove('mail',i)">
-                <mat-icon>remove</mat-icon>
-            </button>
-        </div>
-        <button mat-mini-fab color="primary" type="button" (click)="add('mail')">
-            <mat-icon>plus_one</mat-icon>
-        </button>
-    </div>
-    Website: <input id="website" formControlName="website" /><br />
-    Address: <input id="address" formControlName="address" /><br />
-    User name: <input id="userName" formControlName="userName" /><br />
-    <button type="submit">Update contact</button>
-</form>
+    </body>
 
--->

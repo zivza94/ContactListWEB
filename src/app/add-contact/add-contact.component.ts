@@ -25,13 +25,14 @@ export class AddContactComponent implements OnInit {
   
   
   constructor(private contactService: ContactService, private location: Location,
-    private sharedDataService: SharedDataService, private groupsService:GroupsService) {
+    private sharedDataService: SharedDataService) {
       
      }
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
-    this.groupsService.getGroups(this.userName).subscribe(groups =>this.groups = groups)
+    this.sharedDataService.currentGroups.subscribe(groups => this.groups = groups)
+    
     var form = new FormGroup({
       contactname: new FormControl(),//name
       //groups: new FormArray([]),//groups
@@ -45,7 +46,10 @@ export class AddContactComponent implements OnInit {
     })
     this.addContact.form = form
     this.addContact.groups = new Array<Group>()
-    this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
+    if(this.groups){
+      this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
+    }
+    
 
     /*this.addContact = new FormGroup({
       contactname: new FormControl("", Validators.required),//name
@@ -75,6 +79,11 @@ export class AddContactComponent implements OnInit {
     console.log("add taped")
     var f: FormArray = this.addContact.form.get(name) as FormArray
     f.push(new FormControl())
+  }
+  remove(name: string, index: number) {
+    console.log("remove taped")
+    var f: FormArray = this.addContact.form.get(name) as FormArray
+    f.removeAt(index)
   }
   addGroup(group) {
     this.addContact.groups.push(group)
