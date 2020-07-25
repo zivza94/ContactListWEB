@@ -24,7 +24,8 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import { UpdateContactComponent } from './update-contact/update-contact.component';
 import { FormsModule } from '@angular/forms';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
-import {MatCardModule} from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card'
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -53,7 +54,8 @@ import {MatCardModule} from '@angular/material/card'
     MatIconModule,
     MatSelectModule,
     FontAwesomeModule,
-    MatCardModule
+    MatCardModule,
+    CdkScrollableModule
   ],
   providers: [{ provide: CommService, useClass: LocalCommService }],
   bootstrap: [AppComponent]

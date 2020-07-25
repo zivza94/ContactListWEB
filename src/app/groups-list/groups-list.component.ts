@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Contact } from '../DTO/contact';
 import { ContactService } from '../Services/contact.service';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../Services/shared-data.service';
 import { GroupsService } from '../Services/groups.service';
 import { Group } from '../DTO/groups';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-groups',
@@ -15,6 +16,7 @@ export class GroupsComponent implements OnInit {
 
   selectedGroup: Group
   userName: string
+  clickedGroup: string
   //contacts: Array<Contact> = new Array<Contact>()
   groups: Array<Group> = new Array<Group>()
 
@@ -26,8 +28,6 @@ export class GroupsComponent implements OnInit {
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
     this.getGroups()
-    //this.getcontacts()
-    console.log(this.groups[4]);
   }
 
   getGroups() {
@@ -37,13 +37,12 @@ export class GroupsComponent implements OnInit {
   }
 
   onSelect(group: Group): void {
-    this.selectedGroup = group;
+    //this.clickedGroup = groupName;
+    if (this.selectedGroup === group) {
+      this.selectedGroup = null;
+    } else {
+      this.selectedGroup = group;
+    }
   }
-  /*
-  getcontacts() {
-    this.contactService.getContacts(this.userName)
-      .subscribe(contacts =>
-        this.contacts = contacts)
-  } */
 
 }

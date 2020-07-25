@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contact } from '../DTO/contact';
 import { ContactService } from '../Services/contact.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GroupsService } from '../Services/groups.service';
 import { SharedDataService } from '../Services/shared-data.service';
 import { Group } from '../DTO/groups';
@@ -18,7 +18,7 @@ export class AddGroupComponent implements OnInit {
   contacts: Array<Contact> = new Array<Contact>()
   selectedContacts: Array<Contact> = new Array<Contact>()
   constructor(private contactService: ContactService,
-    private route: ActivatedRoute, private sharedDataService: SharedDataService,
+    private router: Router, private sharedDataService: SharedDataService,
     private groupService: GroupsService) { }
 
   ngOnInit(): void {
@@ -48,6 +48,7 @@ export class AddGroupComponent implements OnInit {
   onSubmit() {
     var group = new Group(0, this.groupForm.get('groupName').value, this.selectedContacts);
     this.groupService.addGroup(this.userName, group);
+    this.router.navigate(['/groups'])
   }
 
 }
