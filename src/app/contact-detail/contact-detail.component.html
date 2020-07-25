@@ -1,4 +1,4 @@
-<div *ngIf="contact">
+<!--<div *ngIf="contact">
 
     <h2>{{contact.name | uppercase}} Details</h2>
     {{contact.image}}
@@ -52,4 +52,74 @@
         </span>
     </div>
 
+</div>-->
+<div *ngIf="contact" class="body">
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="h4 text-center">Contact Information</div>
+        <div class="row pv-lg">
+            <div class="col-lg-2">
+                <div *ngIf="contact.image; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock><img class="img-icon" src="{{contact.image}}" /></ng-template>
+                    <ng-template #elseBlock><img class="img-icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/9/93/Google_Contacts_icon.svg" />
+                    </ng-template>
+            </div>
+            <div class="col-lg-8">
+                <div class="ng-pristine ng-valid">
+                    <div>
+                        <label class="col-sm-3 data"><h2>Name:</h2></label>
+                        <div>
+                            <label class="col-sm-3"></label>
+                            <b>{{contact.name}}</b>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 data"><h2>Mobilephone:</h2></label>
+                        <div *ngFor="let mobile of contact.mobile">
+                            <label class="col-sm-3"></label>
+                            <b>{{mobile}}</b>
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <label class="col-sm-3 data"><h2>Telephone:</h2></label>
+                        <div *ngFor="let phone of contact.telephone">
+                            <label class="col-sm-3"></label>
+                            <b>{{phone}}</b>
+                        </div> 
+                    </div>
+                    <div>
+                        <label class="col-sm-3 data"><h2>Mail:</h2></label>
+                        <div *ngFor="let mail of contact.mail">
+                            <label class="col-sm-3"></label>
+                            <b>{{mail}}</b>
+                        </div> 
+                    </div>
+                    <div>
+                        <label class="col-sm-3 data"><h2>Website:</h2></label>
+                        <div *ngIf="contact.website">
+                            <label class="col-sm-3"></label>
+                            <b>{{contact.website}}</b>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 data"><h2>UserName:</h2></label>
+                        <div *ngIf="contact.userName">
+                            <label class="col-sm-3"></label>
+                            <b>{{contact.userName}}</b>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-sm-3 data"><h2>Groups:</h2></label>
+                        <div *ngFor="let group of contact.groups">
+                            <label class="col-sm-3"></label>
+                            <b>{{group.groupName}}</b>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

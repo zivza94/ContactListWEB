@@ -74,6 +74,10 @@ export class AddContactComponent implements OnInit {
     this.location.back()
 
   }
+  onCancel(){
+    console.log("cancel")
+    this.location.back()
+  }
 
   add(name: string) {
     console.log("add taped")

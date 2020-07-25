@@ -34,6 +34,7 @@ export class RepositoryService {
     contact1.address = "haifa,Israel"
     contact1.mobile.push("0542559492")
     contact1.mobile.push("0542559492")
+    contact1.image = "https://d29fhpw069ctt2.cloudfront.net/icon/image/49067/preview.svg"
     this.AddContact("admin", contact1)
 
     this.AddContact("admin", contact2)
