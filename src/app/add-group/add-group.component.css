@@ -35,10 +35,7 @@ label{
     width: 100px;
 }
 
-.add_btn:hover{
-    color: black;
-    background-color: white;
-}
+
 
 #contacts {
     color: white;

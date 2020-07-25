@@ -45,6 +45,11 @@
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let group of groups">
         {{group.groupName}}
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let contact of group.contacts">
+                {{contact.name}}
+            </li>
+        </ul>
     </li>
 </ul>
 <app-group-detail [group]="selectedGroup"></app-group-detail>

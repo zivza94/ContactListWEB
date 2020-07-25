@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contact } from '../DTO/contact';
 import { ContactService } from '../Services/contact.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +16,7 @@ export class AddGroupComponent implements OnInit {
   groupForm: FormGroup
   userName: string
   contacts: Array<Contact> = new Array<Contact>()
+  selectedContacts: Array<Contact> = new Array<Contact>()
   constructor(private contactService: ContactService,
     private route: ActivatedRoute, private sharedDataService: SharedDataService,
     private groupService: GroupsService) { }
@@ -25,7 +26,7 @@ export class AddGroupComponent implements OnInit {
     this.getcontacts()
     this.groupForm = new FormGroup(
       {
-        groupName: new FormControl
+        groupName: new FormControl('', [Validators.required])
       })
   }
 
@@ -35,8 +36,18 @@ export class AddGroupComponent implements OnInit {
         this.contacts = contacts)
   }
 
+  OnCheckBoxSelect(contact, event) {
+    if (event.target.checked === true) {
+      this.selectedContacts.push(contact);
+    }
+    if (event.target.checked === false) {
+      this.selectedContacts = this.selectedContacts.filter((contact) => contact !== contact);
+    }
+  }
+
   onSubmit() {
-    var group = new Group(6, "Liza's", [])
+    var group = new Group(0, this.groupForm.get('groupName').value, this.selectedContacts);
     this.groupService.addGroup(this.userName, group);
   }
+
 }
