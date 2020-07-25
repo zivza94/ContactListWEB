@@ -105,13 +105,8 @@
                         <a><i class="fa fa-trash" type="button"
                                 (click)="removeContact(contact)">&nbsp;&nbsp;&nbsp;&nbsp;</i></a>
                         <a><i class="fa fa-pencil" [class.selected]="contact === selectedContact"
-<<<<<<< HEAD
                                 (click)="editContact(contact)"></i></a>
                         
-=======
-                                (click)="onSelect(contact) "></i></a>
-
->>>>>>> c0e7944cc74cbda3f1b98b59fd07624f562f36c9
                     </td>
                 </tr>
             </tbody>
@@ -135,33 +130,9 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
       </div>
       
     
-=======
-    </div>
-    <!--Add Contact Modal-->
-    <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <app-add-contact [groups]="groups"></app-add-contact>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
->>>>>>> c0e7944cc74cbda3f1b98b59fd07624f562f36c9
     <!--
     <div *ngIf="selectedContact.id>=5">
         <div id="update">
