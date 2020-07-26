@@ -28,7 +28,6 @@ export class UpdateContactComponent implements OnInit {
 
     var form = new FormGroup({
       contactname: new FormControl(this.contact.name),//name
-      //groups: new FormArray([]),//groups
       image: new FormControl(this.contact.image),//image
       mobile: new FormArray([]),//mobile
       telephone: new FormArray([]),//telephone
@@ -102,9 +101,6 @@ export class UpdateContactComponent implements OnInit {
   get mobile(): FormArray {
     return this.updateContact.form.get('mobile') as FormArray;
   }
-  /*get groups(): FormArray {
-    return this.addContact.get('groups') as FormArray;
-  }*/
   get mail(): FormArray {
     return this.updateContact.form.get('mail') as FormArray;
   }

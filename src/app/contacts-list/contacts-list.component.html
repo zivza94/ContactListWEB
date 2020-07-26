@@ -1,79 +1,3 @@
-<!--
-<button (click)="getcontacts()">getContacts</button>
--->
-<!--<table border=1>
-    <tr>
-        <div class="contactsList"></div>
-        <td>
-            <ng-container *ngFor="let contact of contacts">
-                <img src="contact.image" alt="Picture">
-                <button id="contact.id" (click)="showContact(contact)">{{contact.name}}</button><br />
-            </ng-container>
-        </td>
-        <td>
-            <div *ngIf="selectedid>=0">
-                <form [formGroup]="selectContact.form" (ngSubmit)="onSubmit()">
-                    Name: <input id="name" formControlName="name" /><br />
-                    Groups: <div *ngFor='let group of selectContact.groups'>
-                        {{group.groupName}}
-                        <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
-                            <mat-icon>remove</mat-icon>
-                        </button>
-                    </div><br/>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Select group</mat-label>
-                        <mat-select [(value)]="selectedGroup" >
-                            <mat-option *ngFor="let group of selectContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <button (click)="addGroup(selectedGroup)">Add group</button><br/>
-                    Image: <input type="file" (change)="onImgChose($event)" formControlName="image" /><br />
-                    Mobile: <div id="array" formArrayName="mobile">
-                        <div *ngFor='let mob of mobile.controls;index as i'>
-                            <input [formControlName]="i" placeholder="mobile">
-                            <button mat-mini-fab color="primary" type="button" (click)="remove('mobile',i)">
-                                <mat-icon>remove</mat-icon>
-                            </button>
-                        </div>
-                        <button mat-mini-fab color="primary" type="button" (click)="add('mobile')">
-                            <mat-icon>plus_one</mat-icon>
-                        </button>
-                        
-                    </div>
-                    Telephone: <div id="array" formArrayName="telephone">
-                        <div *ngFor='let tel of telephone.controls;index as i'>
-                            <input [formControlName]="i" placeholder="telephone">
-                            <button mat-mini-fab color="primary" type="button" (click)="remove('telephone',i)">
-                                <mat-icon>remove</mat-icon>
-                            </button>
-                        </div>
-                        <button mat-mini-fab color="primary" type="button" (click)="add('telephone')">
-                            <mat-icon>plus_one</mat-icon>
-                        </button>
-                    </div>
-                    Mail: <div id="array" formArrayName="mail">
-                        <div *ngFor='let m of mail.controls;index as i'>
-                            <input [formControlName]="i" placeholder="mail">
-                            <button mat-mini-fab color="primary" type="button" (click)="remove('mail',i)">
-                                <mat-icon>remove</mat-icon>
-                            </button>
-                        </div>
-                        <button mat-mini-fab color="primary" type="button" (click)="add('mail')">
-                            <mat-icon>plus_one</mat-icon>
-                        </button>
-                    </div>
-                    Website: <input id="website" formControlName="website" /><br />
-                    Address: <input id="address" formControlName="address" /><br />
-                    User name: <input id="userName" formControlName="userName" /><br />
-                    <button type="submit">Update contact</button>
-                </form>
-            </div>
-        </td>
-
-    </tr>
-</table> 
--->
-
 <body>
     <div class="fixed-bottom addbtn float-right">
         <button type="button " class="btn btn-primary float-right add-btn" routerLink="/addcontact">Add Contact</button>
@@ -113,7 +37,7 @@
         </table>
     </div>
     <!--Show Contact Modal-->
-    <div class="modal fade" id="showContactModal" tabindex="-1" role="dialog" aria-labelledby="showContactModalLabel"
+    <div *ngIf="selectedContact" class="modal fade" id="showContactModal" tabindex="-1" role="dialog" aria-labelledby="showContactModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -131,25 +55,4 @@
             </div>
         </div>
       </div>
-      
-    
-    <!--
-    <div *ngIf="selectedContact.id>=5">
-        <div id="update">
-            <app-update-contact [contact]="selectedContact"></app-update-contact>
-        </div>
-    </div>
-    -->
 </body>
-
-<!--
-    <button routerLink="/addcontact">Add Contact</button>
-<ul class = "contatcs">
-<ng-container *ngFor="let contact of contacts">
-    [class.selected]="contact == selectedContact"
-    (click)="onSelect(contact)"
-    <img src="contact.image" alt="Picture">
-    <button id="contact.id" (click)="showContact(contact)">{{contact.name}}</button><br />
-</ng-container>
-</ul>
--->

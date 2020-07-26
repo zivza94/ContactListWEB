@@ -16,7 +16,6 @@ import { GroupsService } from '../Services/groups.service';
   styleUrls: ['./add-contact.component.css']
 })
 export class AddContactComponent implements OnInit {
-  //addContact: FormGroup
   addContact: ContactVM = new ContactVM
   userName: string
   addContactGroupsArray: Array<Group> = new Array()
@@ -35,7 +34,6 @@ export class AddContactComponent implements OnInit {
     
     var form = new FormGroup({
       contactname: new FormControl(),//name
-      //groups: new FormArray([]),//groups
       image: new FormControl(),//image
       mobile: new FormArray([]),//mobile
       telephone: new FormArray([]),//telephone
@@ -49,19 +47,6 @@ export class AddContactComponent implements OnInit {
     if(this.groups){
       this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
     }
-    
-
-    /*this.addContact = new FormGroup({
-      contactname: new FormControl("", Validators.required),//name
-      //groups: new FormArray([]),//groups
-      image: new FormControl(),//image
-      mobile: new FormArray([]),//mobile
-      telephone: new FormArray([]),//telephone
-      mail: new FormArray([]),//mail
-      website: new FormControl(),//website
-      address: new FormControl(),//address
-      userName: new FormControl()//userName
-    })*/
   }
 
   onImgChose(event) {
@@ -98,15 +83,7 @@ export class AddContactComponent implements OnInit {
     this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
   }
 
-  /*formToContact(form: FormGroup): Contact {
-    var contact = new Contact(0, form.get('name').value, form.get('groups').value, form.get('image').value)
-    contact.address = form.get('address').value
-    contact.mobile = form.get('mobile').value
-    contact.telephone = form.get('telephone').value
-    contact.website = form.get('website').value
-    contact.userName = form.get('userName').value
-    return contact
-  }*/
+  
   formToContact(cont:ContactVM): Contact {
     var contact = new Contact(0, cont.form.get('contactname').value, cont.groups, cont.form.get('image').value)
     contact.mobile = cont.form.get('mobile').value
@@ -120,9 +97,6 @@ export class AddContactComponent implements OnInit {
   get mobile(): FormArray {
     return this.addContact.form.get('mobile') as FormArray;
   }
-  /*get groups(): FormArray {
-    return this.addContact.get('groups') as FormArray;
-  }*/
   get mail(): FormArray {
     return this.addContact.form.get('mail') as FormArray;
   }
