@@ -18,7 +18,9 @@ export class UpdateGroupComponent implements OnInit {
   group: Group
   groupForm: FormGroup
   contacts: Array<Contact> = new Array<Contact>()
+  alreadySelectedContacts: Array<Contact>
   selectedContacts: Array<Contact> = new Array<Contact>()
+
   constructor(private contactService: ContactService,
     private router: Router, private sharedDataService: SharedDataService,
     private groupService: GroupsService, private location: Location) { }
@@ -31,6 +33,7 @@ export class UpdateGroupComponent implements OnInit {
       {
         groupName: new FormControl(this.group.groupName, [Validators.required])
       })
+    this.alreadySelectedContacts = this.group.contacts
   }
 
   getcontacts() {

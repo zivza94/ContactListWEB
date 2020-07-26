@@ -12,7 +12,7 @@ body{
 }
 
 .card{
-    height: 450px;
+    height: 550px;
     margin-top: auto;
     margin-bottom: auto;
     width: 400px;
@@ -34,10 +34,6 @@ label{
     width: 100px;
 }
 
-.login_btn:hover{
-    color: black;
-    background-color: white;
-}
 
 .input-group{
     margin-bottom: 18px;

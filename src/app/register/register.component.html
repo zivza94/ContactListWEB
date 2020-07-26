@@ -25,39 +25,51 @@
                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
                             <input type="text" class="form-control" formControlName="username"
+                                [ngClass]="{'is-invalid':registerForm.get('username').touched && registerForm.get('username').invalid}"
                                 placeholder="Choose user name">
+                            <div class="invalid-feedback">
+                                <div>user name of at least 4 chars is required</div>
+                            </div>
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
                             </div>
                             <input type="password" class="form-control" formControlName="password"
+                                [ngClass]="{'is-invalid':registerForm.get('password').touched && registerForm.get('password').invalid}"
                                 placeholder="Choose password">
+                            <div class="invalid-feedback">
+                                <div>password of at least 4 chars is required</div>
+                            </div>
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-key"></i></span>
                             </div>
                             <input type="password" class="form-control" formControlName="passwordcheck"
+                                [ngClass]="{'is-invalid':registerForm.get('passwordcheck').touched && registerForm.get('passwordcheck').invalid}"
                                 placeholder="Enter password again">
+                            <div class="invalid-feedback">
+                                <div>password of least 4 chars is required</div>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary float-right login_btn">Register</button>
+
+                        <button type="submit" class="btn btn-primary float-right login_btn"
+                            [disabled]="!registerForm.valid">
+                            Register
+                        </button>
+
                     </form>
                     <div *ngIf="errorMsg!=''" class="error-msg">
                         {{errorMsg}}
                     </div>
+
+                </div>
+                <div *ngIf="registerForm.errors?.passwordError && (registerForm.touched || registerForm.dirty)"
+                    class="cross-validation-error-message alert alert-danger small">
+                    password mismatch
                 </div>
             </div>
         </div>
     </div>
 </body>
-
-
-<!--<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    First Name: <input id="firstName" formControlName="firstName" /><br />
-    Last Name: <input id="lastName" formControlName="lastName" /><br />
-    * User Name: <input id="userName" formControlName="userName" /><br />
-    * Password: <input id="password" formControlName="password" /><br />
-    * Insert Passward again: <input id="passwordCheck" formControlName="passwordCheck" /><br />
-    <button type="submit">Login</button>
-</form> -->

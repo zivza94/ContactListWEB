@@ -30,7 +30,8 @@ export class RepositoryService {
     //create the contacts
     var contact1 = new Contact(1, "ziv", [group], null)
     var contact2 = new Contact(2, "david", [], null)
-    var contact3 = new Contact(3, "ash", [], null)
+    var contact3 = new Contact(3, "ash", [group], null)
+    var contact4 = new Contact(4, "liza", [group], null)
     contact1.address = "haifa,Israel"
     contact1.mobile.push("0542559492")
     contact1.mobile.push("0542559492")
@@ -39,7 +40,7 @@ export class RepositoryService {
 
     this.AddContact("admin", contact2)
     this.AddContact("admin", contact3)
-
+    this.AddContact("admin", contact4)
     var group = new Group(4, "5", [contact1])
     this.AddGroup("admin", group)
 
@@ -144,11 +145,8 @@ export class RepositoryService {
   // Login
   Login(userName: string, password: string): LoginResponse {
     var retval = new LoginResponse("Invalid", "Wrong userName or Password")
-    console.log(this.users.has("admin"));
     if (userName in this.users) {
       var user = this.users[userName]
-      console.log(user.password);
-      console.log(password);
       if (user.password == password) {
         retval.status = "OK"
         retval.message = "Login successfully"
