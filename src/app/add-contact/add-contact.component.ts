@@ -1,14 +1,11 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-import { CommService } from '../Services/comm.service';
 import { Location } from '@angular/common'
 import { ContactService } from '../Services/contact.service';
 import { Contact } from '../DTO/contact';
 import { SharedDataService } from '../Services/shared-data.service';
 import { Group } from '../DTO/groups';
 import { ContactVM } from '../VM/contact-vm';
-import { ActivatedRoute, Router } from '@angular/router';
-import { GroupsService } from '../Services/groups.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -19,19 +16,19 @@ export class AddContactComponent implements OnInit {
   addContact: ContactVM = new ContactVM
   userName: string
   addContactGroupsArray: Array<Group> = new Array()
-  selectedGroup:Group
-  @Input() groups:Array<Group>
-  
-  
+  selectedGroup: Group
+  @Input() groups: Array<Group>
+
+
   constructor(private contactService: ContactService, private location: Location,
     private sharedDataService: SharedDataService) {
-      
-     }
+
+  }
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
     this.sharedDataService.currentGroups.subscribe(groups => this.groups = groups)
-    
+
     var form = new FormGroup({
       contactname: new FormControl(),//name
       image: new FormControl(),//image
@@ -44,7 +41,7 @@ export class AddContactComponent implements OnInit {
     })
     this.addContact.form = form
     this.addContact.groups = new Array<Group>()
-    if(this.groups){
+    if (this.groups) {
       this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
     }
   }
@@ -59,7 +56,7 @@ export class AddContactComponent implements OnInit {
     this.location.back()
 
   }
-  onCancel(){
+  onCancel() {
     console.log("cancel")
     this.location.back()
   }
@@ -83,8 +80,8 @@ export class AddContactComponent implements OnInit {
     this.addContactGroupsArray = this.groups.filter(gro => this.addContact.groups.indexOf(gro) == -1)
   }
 
-  
-  formToContact(cont:ContactVM): Contact {
+
+  formToContact(cont: ContactVM): Contact {
     var contact = new Contact(0, cont.form.get('contactname').value, cont.groups, cont.form.get('image').value)
     contact.mobile = cont.form.get('mobile').value
     contact.telephone = cont.form.get('telephone').value

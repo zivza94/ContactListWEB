@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Contact } from '../DTO/contact';
 import { ContactService } from '../Services/contact.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedDataService } from '../Services/shared-data.service';
 import { GroupsService } from '../Services/groups.service';
 import { Group } from '../DTO/groups';
@@ -13,7 +13,7 @@ import { CdkScrollableModule } from '@angular/cdk/scrolling';
   styleUrls: ['./groups-list.component.css']
 })
 export class GroupsComponent implements OnInit {
-  selectedContact:Contact
+  selectedContact: Contact
   selectedGroup: Group
   userName: string
   clickedGroup: string
@@ -22,7 +22,7 @@ export class GroupsComponent implements OnInit {
 
   public isCollapsed = false;
   constructor(private contactService: ContactService,
-    private route: ActivatedRoute, private sharedDataService: SharedDataService,
+    private route: Router, private sharedDataService: SharedDataService,
     private groupService: GroupsService) { }
 
   ngOnInit(): void {
@@ -44,8 +44,17 @@ export class GroupsComponent implements OnInit {
       this.selectedGroup = group;
     }
   }
-  onSelectContact(contact: Contact){
+  onSelectContact(contact: Contact) {
     this.selectedContact = contact
   }
 
+  removeGroup(group: Group) {
+    this.groupService.deleteGroup(this.userName, group)
+    this.getGroups()
+  }
+
+  editGroup(group: Group) {
+    this.sharedDataService.changeGroup(group)
+    this.route.navigate(['/updategroup'])
+  }
 }

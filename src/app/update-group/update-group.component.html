@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-times float-right" aria-hidden="true" (click)="onCancel()"></i>
-                    <h2>Add Group</h2>
+                    <h2>Update Group</h2>
                 </div>
                 <div class="card-body">
                     <form [formGroup]="groupForm" (ngSubmit)="groupForm.valid && onSubmit()">
@@ -19,14 +19,14 @@
                                 <div>group name is required</div>
                             </div>
                         </div>
-                        Choose contacts to add:
+                        Choose contacts:
                         <div *ngFor="let contact of contacts" id="contacts">
                             <input type="checkbox" (change)="OnCheckBoxSelect(contact, $event)" />
                             {{ contact.name }}
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary float-right add_btn"
-                                [disabled]="!groupForm.valid">Add</button>
+                                [disabled]="!groupForm.valid">Update</button>
                         </div>
                     </form>
                 </div>
@@ -34,14 +34,3 @@
         </div>
     </div>
 </body>
-
-
-<!-- <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
-    Group Name: <input id="groupName" formControlName="groupName" /><br />
-    Choose Contacts To Add:
-    <div *ngFor="let contact of contacts">
-        <input type="checkbox" />
-        {{ contact.name }}
-    </div>
-    <button type="submit">Add</button>
-</form> -->

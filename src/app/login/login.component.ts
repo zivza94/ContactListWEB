@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   errorMsg: string = ""
   userName: string
 
-  constructor(private loginService: LoginService,private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup(
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         password: new FormControl("admin")
       }
     )
-    
+
   }
   onSubmit() {
     /*
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.loginService.Login(this.loginForm.value.username, this.loginForm.value.password).
       subscribe(result => {
         if (result.status == "OK") {
-          this.router.navigate(['/home'])
+          this.router.navigate(['/contacts'])
         } else {
           this.errorMsg = result.message
         }

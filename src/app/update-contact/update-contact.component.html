@@ -1,39 +1,40 @@
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-times float-right" aria-hidden="true" (click)="onCancel()"></i>
+                    <h2>Update Contact</h2>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="updateContact.form" (ngSubmit)="onSubmit()">
+                        <div class="input-group form-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" formControlName="contactname"
+                                placeholder="contanct name">
+                        </div>
+                        Groups: <div *ngFor='let group of updateContact.groups'>
+                            {{group.groupName}}
+                            <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div><br />
+                        <mat-form-field appearance="fill">
+                            <mat-label>Select group</mat-label>
+                            <mat-select [(value)]="selectedGroup">
+                                <mat-option *ngFor="let group of updateContactGroupsArray" [value]="group">
+                                    {{group.groupName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button type="button" (click)="addGroup(selectedGroup)">Add group</button><br />
+                        Choose Img:
+                        <div class="input-group form-group input-group-sm">
+                            <input type="file" (change)="onImgChose($event)" formControlName="image" />
+                        </div>
 
-    <body>
-        <div class="container">
-            <div class="d-flex justify-content-center h-100">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Update Contact</h2>
-                    </div>
-                    <div class="card-body">
-                        <form [formGroup]="updateContact.form" (ngSubmit)="onSubmit()">
-                            <div class="input-group form-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" formControlName="contactname"
-                                    placeholder="contanct name">
-                            </div>
-                            Groups: <div *ngFor='let group of updateContact.groups'>
-                                {{group.groupName}}
-                                <button mat-mini-fab color="primary" type="button" (click)="removeGroup(group)">
-                                    <mat-icon>remove</mat-icon>
-                                </button>
-                            </div><br/>
-                            <mat-form-field appearance="fill">
-                                <mat-label>Select group</mat-label>
-                                <mat-select [(value)]="selectedGroup"  >
-                                    <mat-option *ngFor="let group of updateContactGroupsArray" [value]="group">{{group.groupName}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <button type="button" (click)="addGroup(selectedGroup)">Add group</button><br/>
-                            Choose Img:
-                            <div class="input-group form-group input-group-sm">
-                                <input type="file" (change)="onImgChose($event)" formControlName="image" />
-                            </div>
-                            
-                            Add mobile numbers:
+                        Add mobile numbers:
                         <div id="array" formArrayName="mobile">
                             <div *ngFor='let mob of mobile.controls;index as i'>
                                 <div class="input-group form-group input-group-sm">
@@ -45,7 +46,7 @@
                                         <mat-icon>remove</mat-icon>
                                     </button>
                                 </div>
-                                
+
                             </div>
                             <button type="button" (click)="add('mobile')">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -58,7 +59,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-phone"></i></span>
                                     </div>
-                                    <input type="text" class="form-control"  [formControlName]="i" placeholder="telephone">
+                                    <input type="text" class="form-control" [formControlName]="i"
+                                        placeholder="telephone">
                                     <button mat-mini-fab color="primary" type="button" (click)="remove('telephone',i)">
                                         <mat-icon>remove</mat-icon>
                                     </button>
@@ -85,26 +87,24 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
-                            <br />
-                            <div class="input-group form-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-internet-explorer"></i></span>
-                                </div>
-                                <input type="text" class="form-control" formControlName="website"
-                                    placeholder="website address">
+                        <br />
+                        <div class="input-group form-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-internet-explorer"></i></span>
                             </div>
-                            <div class="input-group form-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" formControlName="userName" placeholder="user name">
+                            <input type="text" class="form-control" formControlName="website"
+                                placeholder="website address">
+                        </div>
+                        <div class="input-group form-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
                             </div>
-                            <button type="button" class="btn btn-primary float-right login_btn" (click)="onCancel()">Cancel</button>
-                            <button type="submit" class="btn btn-primary float-right login_btn">Update</button>
-                        </form>
-                    </div>
+                            <input type="text" class="form-control" formControlName="userName" placeholder="user name">
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right login_btn">Update</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </body>
-
+    </div>
+</body>

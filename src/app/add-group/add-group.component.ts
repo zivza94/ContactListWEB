@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GroupsService } from '../Services/groups.service';
 import { SharedDataService } from '../Services/shared-data.service';
 import { Group } from '../DTO/groups';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-add-group',
@@ -19,7 +20,7 @@ export class AddGroupComponent implements OnInit {
   selectedContacts: Array<Contact> = new Array<Contact>()
   constructor(private contactService: ContactService,
     private router: Router, private sharedDataService: SharedDataService,
-    private groupService: GroupsService) { }
+    private groupService: GroupsService, private location: Location) { }
 
   ngOnInit(): void {
     this.sharedDataService.currentMessage.subscribe(msg => this.userName = msg)
@@ -49,6 +50,11 @@ export class AddGroupComponent implements OnInit {
     var group = new Group(0, this.groupForm.get('groupName').value, this.selectedContacts);
     this.groupService.addGroup(this.userName, group);
     this.router.navigate(['/groups'])
+  }
+
+  onCancel() {
+    console.log("cancel")
+    this.location.back()
   }
 
 }

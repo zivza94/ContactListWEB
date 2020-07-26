@@ -1,7 +1,28 @@
+body {
+    background-image: url('http://getwallpapers.com/wallpaper/full/4/b/7/235248.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 150%;
+    font-family: 'Numans', sans-serif;
+}
+
 .noBorder {
     border:none !important;
 }
 .add-btn{
     margin-bottom: 50px;
     margin-right: 50px; 
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+#groupsTable b {
+    color: blue;
 }

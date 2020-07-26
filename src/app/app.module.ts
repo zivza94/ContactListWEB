@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { MatCardModule } from '@angular/material/card'
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { UpdateGroupComponent } from './update-group/update-group.component';
 
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -43,7 +44,8 @@ import { CdkScrollableModule } from '@angular/cdk/scrolling';
     RegisterComponent,
     ContactDetailComponent,
     UpdateContactComponent,
-    GroupDetailComponent
+    GroupDetailComponent,
+    UpdateGroupComponent
   ],
   imports: [
     BrowserModule,
