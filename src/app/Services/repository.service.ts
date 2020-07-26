@@ -193,7 +193,7 @@ export class RepositoryService {
     var groups = this.users[userName].groups
 
     // Update the contacts
-    var oldGroup: Group = groups.filter(gro => gro.groupId === group.groupID)[0]
+    var oldGroup: Group = groups.filter(gro => gro.groupID === group.groupID)[0]
     //add groups
     group.contacts.forEach(contact => {
       if (oldGroup.contacts.indexOf(contact) != -1) {
